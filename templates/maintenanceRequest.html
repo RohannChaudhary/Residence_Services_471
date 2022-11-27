@@ -1,0 +1,24 @@
+<h1> Submit Maintenance Request </h1>
+<style>
+    h5{
+        color: red;
+    }
+    
+</style>
+{% for message in messages%}
+<h5>{{message}}</h5>
+{% endfor %}
+
+<form action = "maintenanceRequest" method = "POST">
+    {% csrf_token %}
+    <p>Username: </p>
+    <input type = "text" name = "username"> 
+    <p>Password: </p>
+    <input type = "password" name = "password"> </br>
+    <input type = "submit" > 
+
+    <p></p>
+    <p>If you're not a member, Sign up Today</p>
+    <li><a class="getstarted scrollto" href="index">Sign up</a></li>
+
+</form>
