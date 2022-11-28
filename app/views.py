@@ -132,4 +132,8 @@ def maintenanceRequest(request):
             messages.info(request,'Invalid Username')
             return redirect('maintenanceRequest')
     else:
+        # student = models.Student.objects.all()
+        # serializer = StudentSerializer(student,many=True)
+        # content = JSONRenderer().render(serializer.data)
+        # return JsonResponse(serializer.data,safe=False)
         return render(request,'maintenance.html')
