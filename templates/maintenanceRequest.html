@@ -1,3 +1,9 @@
+<style>
+    .details{
+        height : 200px;    
+        width : 300px;
+        overflow : auto;
+    }
 </style>
 {% for message in messages%}
 <h5>{{message}}</h5>
@@ -14,12 +20,7 @@
     <p>Building: </p>
     <input type = "text" name = "building"> </br>
     <p>Details: </p>
-    <input type = "text" name = "details"> </br>
+    <textarea class="details" name = "details" placeholder = "Please enter your studentID, roomNo and buildingID in this field" height=200px, width= 300px></textarea> </br>
     <input type = "submit" > 
-
-
-    <p></p>
-    <p>If you're not a member, Sign up Today</p>
-    <li><a class="getstarted scrollto" href="index">Sign up</a></li>
 
 </form>

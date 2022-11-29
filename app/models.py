@@ -55,7 +55,7 @@ class Food_Plan(models.Model):
 
 # Student model
 class Student(models.Model):
-    user = models.OneToOneField(Person, primary_key=True, on_delete=models.CASCADE)
+    user = models.OneToOneField('Person', primary_key=True, on_delete=models.CASCADE)
     year = models.IntegerField()
     type = models.ForeignKey(Food_Plan,on_delete = models.SET_NULL, null = True)
     
@@ -64,7 +64,7 @@ class Student(models.Model):
 
 # Staff model
 class Staff(models.Model):
-    user = models.OneToOneField(Person, primary_key=True, on_delete=models.CASCADE)
+    user = models.OneToOneField('Person', primary_key=True, on_delete=models.CASCADE)
     def __str__(self):
         return self.username
 
@@ -97,8 +97,8 @@ class Room(models.Model):
         constraints = [models.UniqueConstraint(fields=['roomNo','buildingID'], name = 'roomID')]
 
 class Room_Booking(models.Model):
-    roomNo = models.ForeignKey(Room,on_delete=models.CASCADE)
-    studentID = models.OneToOneField(Student, on_delete=models.SET_NULL,null=True)
+    roomNo = models.ForeignKey('Room',on_delete=models.CASCADE)
+    studentID = models.OneToOneField('Student', on_delete=models.SET_NULL,null=True)
 
     class Constraint:
         constraints = [models.UniqueConstraint(fields=['roomNo','studentID'], name = 'roomBookingConstraint')]
@@ -112,8 +112,8 @@ class Maintenance(models.Model):
     )
     maintenanceID = models.AutoField(primary_key=True)
     date = models.DateField(auto_now_add=True, blank=True)
-    studentID = models.OneToOneField(Student,on_delete=models.SET_NULL,null=True)
-    room = models.OneToOneField(Room,on_delete=models.SET_NULL,null=True)
+    studentID = models.OneToOneField('Student',on_delete=models.SET_NULL,null=True)
+    room = models.OneToOneField('Room',on_delete=models.SET_NULL,null=True)
     details = models.TextField()
     status = models.CharField(max_length=20, choices=STATUS, default='NOT RESOLVED')
 
@@ -125,17 +125,17 @@ class Complain(models.Model):
     )
     complainID = models.AutoField(primary_key=True)
     date = models.DateTimeField(auto_now_add=True, blank=True)
-    student = models.OneToOneField(Student,on_delete=models.SET_NULL,null=True)
-    admin = models.OneToOneField(Admin,on_delete=models.SET_NULL ,null=True)
+    student = models.OneToOneField('Student',on_delete=models.SET_NULL,null=True)
+    admin = models.OneToOneField('Admin',on_delete=models.SET_NULL ,null=True)
     details = models.CharField(max_length=1000)
     status = models.CharField(max_length=20, choices=STATUS, default='NOT RESOLVED')
 
 class Fulfills_Maintenance(models.Model):
-    maintenanceID = models.ForeignKey(Maintenance,on_delete=models.SET_NULL,null=True)
-    technicianID = models.ForeignKey(Technician,on_delete= models.SET_NULL,null=True)
+    maintenanceID = models.ForeignKey('Maintenance',on_delete=models.SET_NULL,null=True)
+    technicianID = models.ForeignKey('Technician',on_delete= models.SET_NULL,null=True)
     
 class Payment(models.Model):
     paymentID = models.AutoField(primary_key=True)
     date = models.DateField()
-    studentID = models.OneToOneField(Student,on_delete=models.SET_NULL,null=True)
+    studentID = models.OneToOneField('Student',on_delete=models.SET_NULL,null=True)
     amount = models.IntegerField()

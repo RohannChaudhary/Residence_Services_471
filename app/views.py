@@ -123,13 +123,26 @@ def maintenanceRequest(request):
         details = request.POST['details']
         building = request.POST['building']
         
-        room1 = models.Room.objects.filter(roomNo = room , buildingID = building)
-        room = models.Room(room1)
-        student1 = models.Student.objects.filter(user=username)
-        student = models.Student(student1)
-        if(student):
+        # room1 = models.Room.objects.filter(roomNo = room , buildingID = building)
+        # room = models.Room(room1)
+        room_list = list(models.Room.objects.all())
+        student_list = list(models.Student.objects.all())
+        
+        student = models.Student()
+        room= models.Room()
+        for student1 in student_list:
+            if(student1.user == username):
+                student = student1
+                break
+        for room1 in room_list:
+            if room1.roomNo == room and room1.buildingID == building:
+                room = room1
+                break
+        # student1 = models.Student.objects.filter(user=username)
+        # student = models.Student(student1)
+        if(student and room):
             m = models.Maintenance(studentID = student, date = date.today(), room = room, details = details, status = 'NOT RESOLVED')
-            m.save()
+            m.save_base()
             messages.info(request,'Maintenance Request Submitted')
             return redirect('maintenanceRequest')
         else:
