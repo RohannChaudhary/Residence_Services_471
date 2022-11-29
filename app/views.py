@@ -121,9 +121,13 @@ def maintenanceRequest(request):
         username = request.POST['username']
         room = request.POST['room']
         details = request.POST['details']
+        building = request.POST['building']
         
-        student = models.Student.objects.filter(username=username)
-        if(student.exists()):
+        room1 = models.Room.objects.filter(roomNo = room , buildingID = building)
+        room = models.Room(room1)
+        student1 = models.Student.objects.filter(user=username)
+        student = models.Student(student1)
+        if(student):
             m = models.Maintenance(studentID = student, date = date.today(), room = room, details = details, status = 'NOT RESOLVED')
             m.save()
             messages.info(request,'Maintenance Request Submitted')
@@ -136,4 +140,4 @@ def maintenanceRequest(request):
         # serializer = StudentSerializer(student,many=True)
         # content = JSONRenderer().render(serializer.data)
         # return JsonResponse(serializer.data,safe=False)
-        return render(request,'maintenance.html')
+        return render(request,'maintenanceRequest.html')
