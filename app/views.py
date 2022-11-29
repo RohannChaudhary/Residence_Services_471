@@ -126,13 +126,13 @@ def maintenanceRequest(request):
         # room1 = models.Room.objects.filter(roomNo = room , buildingID = building)
         # room = models.Room(room1)
         room_list = list(models.Room.objects.all())
-        student_list = list(models.Student.objects.all())
+        person_list = list(models.Person.objects.all())
         
-        student = models.Student()
+        student = models.Person()
         room= models.Room()
-        for student1 in student_list:
-            if(student1.user == username):
-                student = student1
+        for person1 in person_list:
+            if(person1.username == username):
+                student = person1
                 break
         for room1 in room_list:
             if room1.roomNo == room and room1.buildingID == building:
@@ -141,7 +141,8 @@ def maintenanceRequest(request):
         # student1 = models.Student.objects.filter(user=username)
         # student = models.Student(student1)
         if(student and room):
-            m = models.Maintenance(studentID = student, date = date.today(), room = room, details = details, status = 'NOT RESOLVED')
+            studentobject = models.Student(user=student)
+            m = models.Maintenance(studentID = studentobject, date = date.today(), room = room, details = details, status = 'NOT RESOLVED')
             m.save_base()
             messages.info(request,'Maintenance Request Submitted')
             return redirect('maintenanceRequest')

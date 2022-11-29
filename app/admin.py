@@ -3,7 +3,6 @@ from . import models
 
 # Register your models here.
 admin.site.register(models.Person)
-admin.site.register(models.Staff)
 admin.site.register(models.Building)
 admin.site.register(models.Food_Plan)
 admin.site.register(models.Room)
