@@ -113,8 +113,6 @@ def studentLogin(request):
         #     return redirect ('login')
     else:
        return render(request,'login.html') 
-def post(request):
-    return render(request,'student.html')
 
 def maintenanceRequest(request):
     if request.method == 'POST':
@@ -126,23 +124,22 @@ def maintenanceRequest(request):
         # room1 = models.Room.objects.filter(roomNo = room , buildingID = building)
         # room = models.Room(room1)
         room_list = list(models.Room.objects.all())
-        person_list = list(models.Person.objects.all())
+        student_list = list(models.Student.objects.all())
         
-        student = models.Person()
+        student = models.Student()
         room= models.Room()
-        for person1 in person_list:
-            if(person1.username == username):
-                student = person1
+        for student1 in student_list:
+            if(student1.user == username):
+                student = student1
                 break
+
         for room1 in room_list:
             if room1.roomNo == room and room1.buildingID == building:
                 room = room1
                 break
-        # student1 = models.Student.objects.filter(user=username)
-        # student = models.Student(student1)
-        if(student and room):
-            studentobject = models.Student(user=student)
-            m = models.Maintenance(studentID = studentobject, date = date.today(), room = room, details = details, status = 'NOT RESOLVED')
+
+        if(student is not None and room is not None):
+            m = models.Maintenance(studentID = student, date = date.today(), room = room, details = details, status = 'NOT RESOLVED')
             m.save_base()
             messages.info(request,'Maintenance Request Submitted')
             return redirect('maintenanceRequest')
@@ -150,8 +147,4 @@ def maintenanceRequest(request):
             messages.info(request,'Invalid Username')
             return redirect('maintenanceRequest')
     else:
-        # student = models.Student.objects.all()
-        # serializer = StudentSerializer(student,many=True)
-        # content = JSONRenderer().render(serializer.data)
-        # return JsonResponse(serializer.data,safe=False)
         return render(request,'maintenanceRequest.html')
