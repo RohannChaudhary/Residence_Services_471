@@ -1,5 +1,5 @@
 {%load static%}
-<h1> Login Now </h1>
+<h1> </h1>
 {% comment %} 
 
 <div class="container">
@@ -15,6 +15,7 @@
   <a href="https://twitter.com/prathkum">MADE BY PRATHAM</a>
 </div> {% endcomment %}
 <style>
+  
   input {
     caret-color: red;
   }
@@ -23,7 +24,10 @@
     margin: 0;
     width: 100vw;
     height: 100vh;
-    background: #ecf0f3;
+    background: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT603EjCxpe5GOxu5b2VzOIOPAU490r_xSBvw&usqp=CAU);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
     display: flex;
     align-items: center;
     text-align: center;
@@ -40,25 +44,27 @@
     border-radius: 20px;
     padding: 40px;
     box-sizing: border-box;
-    background: #ecf0f3;
-    box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
+    background: #ffffff;
+    box-shadow: 14px 14px 40px #362726, -14px -14px 40px #362726;
   }
   
   .brand-logo {
     height: 100px;
     width: 100px;
-    background:{% static 'assets/img/favicon.png' %};
+    background: url(https://www.ucalgary.ca/sites/default/files/styles/ucws_image_desktop/public/2020-07/UC-1.jpg?itok=teKbFPDq);
+    background-position: center;
+    background-size: cover;
     margin: auto;
     border-radius: 50%;
     box-sizing: border-box;
-    box-shadow: 7px 7px 10px #cbced1, -7px -7px 10px white;
+    box-shadow: 7px 7px 10px #342220, -7px -7px 10px white;
   }
   
   .brand-title {
     margin-top: 10px;
     font-weight: 900;
     font-size: 1.8rem;
-    color: #1DA1F2;
+    color: #342220;
     letter-spacing: 1px;
   }
   
@@ -99,14 +105,14 @@
   }
   
   button {
-    color: white;
+    color: #f3dad7;
     margin-top: 20px;
-    background: #1DA1F2;
+    background: #f3dad7;
     height: 40px;
     border-radius: 20px;
     cursor: pointer;
     font-weight: 900;
-    box-shadow: 6px 6px 6px #cbced1, -6px -6px 6px white;
+    box-shadow: 6px 6px 15px #362726, -6px -6px 15px #362726;
     transition: 0.5s;
   }
   
@@ -139,18 +145,19 @@
 
 <div class="container">
   <div class="brand-logo"></div>
-  <div class="brand-title">UofC Residence Services</div>
+  <div class="brand-title">Residence Services</div>
   <form class="input" action = "login" method = "POST">
       {% csrf_token %}
      <p>Username: </p>
      <input type = "text" name = "username"> 
      <p>Password: </p>
      <input type = "password" name = "password"> </br>
-     <input type = "submit" > 
+     <button type="button">Click Me!</button>
+     
 
+<!--
   </form>
-
-{% comment %} <html>
+<html>
 <head>
   <meta charset="utf-8">
   <title>Stackfindover: Sign in</title>
@@ -227,4 +234,4 @@
   </div>
 </body>
 
-</html> {% endcomment %}
+</html> % endcomment %-->
