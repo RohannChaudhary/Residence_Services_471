@@ -5,7 +5,7 @@ from django.contrib.auth.models import User, auth
 from django.contrib import messages
 from . import models
 from . import serializer
-from .serializer import StudentSerializer,PersonSerializer, AdminSerializer, StaffSerializer, TechnicianSerializer, PaymentSerializer
+from .serializer import StudentSerializer,PersonSerializer, AdminSerializer, StaffSerializer, TechnicianSerializer, PaymentSerializer, ComplainSerializer
 from django.http import JsonResponse
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
@@ -20,21 +20,11 @@ def studentLogin(request):
         username = request.POST['username']
         passowrd = request.POST['password']
 
-        student = models.Student.objects.all()
-        serializer = StudentSerializer(student,many=True)
-        content = JSONRenderer().render(serializer.data)
-
         person = models.Person.objects.all()
         personSerializer = PersonSerializer(person,many=True)
         personContent = JSONRenderer().render(personSerializer.data)
 
-        payment = models.Payment.objects.all()
-        paymentSerializer = PaymentSerializer(payment,many=True)
-        paymentContent = JSONRenderer().render(paymentSerializer.data)
-
-        ys = json.loads(content)
         xs = json.loads(personContent)
-        zs = json.loads(paymentContent)
         
         for x in xs:
             if x['username'] == username and x['password'] == passowrd:
@@ -42,6 +32,19 @@ def studentLogin(request):
                 break
 
         if(a['is_student']):
+            
+            student = models.Student.objects.all()
+            serializer = StudentSerializer(student,many=True)
+            content = JSONRenderer().render(serializer.data)
+            
+                
+            payment = models.Payment.objects.all()
+            paymentSerializer = PaymentSerializer(payment,many=True)
+            paymentContent = JSONRenderer().render(paymentSerializer.data)
+                
+            ys = json.loads(content)
+            zs = json.loads(paymentContent)
+
             for y in ys:
                 if y['user'] == username:
                     b = y 
@@ -68,7 +71,36 @@ def studentLogin(request):
             return render(request,'student.html',{'a':a, 'b':b})              
         
         elif(a['is_admin']):
-            return JsonResponse(a,safe=False)      
+            
+            staff = models.Staff.objects.all()
+            staffSerializer = StaffSerializer(staff,many=True)
+            staffContent = JSONRenderer().render(staffSerializer.data)
+            
+                
+            admin = models.Admin.objects.all()
+            adminSerializer = AdminSerializer(admin,many=True)
+            adminContent = JSONRenderer().render(adminSerializer.data)
+            
+            xs = json.loads(staffContent)
+            ys = json.loads(adminContent)
+            
+            for y in ys:
+                if y['user'] == username:
+                    b = y 
+                    break     
+   
+            complain = models.Complain.objects.all()
+            complainSerializer = ComplainSerializer(complain,many=True)
+            complainContent = JSONRenderer().render(complainSerializer.data)
+            
+            zs = json.loads(complainContent)
+            
+            zs_dict = [z for z in zs if z['admin'] == username]
+            
+            zs_out = json.dumps(zs_dict)
+                            
+            return render(request,'adminDashboard.html',{'zs':zs_out})
+    
         elif(a['is_technician']):
             return JsonResponse(a,safe=False)
         else:
@@ -121,47 +153,50 @@ def maintenanceRequest(request):
     else:
         return render(request,'maintenanceRequest.html')
     
-def adminLogin(request):
-        if request.method == 'POST':
-            username = request.POST['username1']
-            passowrd = request.POST['password1']
+# def adminLogin(request):
+#         if request.method == 'POST':
+#             username = request.POST['username1']
+#             passowrd = request.POST['password1']
 
-            admin = models.Admin.objects.all()
-            serializer = StudentSerializer(admin,many=True)
-            content = JSONRenderer().render(serializer.data)
+#             admin = models.Admin.objects.all()
+#             serializer = StudentSerializer(admin,many=True)
+#             content = JSONRenderer().render(serializer.data)
             
-            staff = models.Staff.objects.all()
-            adminSerializer = StaffSerializer(staff,many=True)
-            adminContent = JSONRenderer().render(adminSerializer.data)
+#             staff = models.Staff.objects.all()
+#             adminSerializer = StaffSerializer(staff,many=True)
+#             adminContent = JSONRenderer().render(adminSerializer.data)
 
-            person = models.Person.objects.all()
-            personSerializer = PersonSerializer(person,many=True)
-            personContent = JSONRenderer().render(personSerializer.data)
+#             person = models.Person.objects.all()
+#             personSerializer = PersonSerializer(person,many=True)
+#             personContent = JSONRenderer().render(personSerializer.data)
 
-            ys = json.loads(content)
-            xs = json.loads(personContent)
-            zs = json.loads(adminSerializer)
+#             ys = json.loads(content)
+#             xs = json.loads(personContent)
+#             zs = json.loads(adminSerializer)
             
-            a = xs
-            b = ys
+#             a = xs
+#             b = ys
         
-            for x in xs:
-                if x['username'] == username and x['password'] == passowrd:
-                    a = x
-                    break
+#             for x in xs:
+#                 if x['username'] == username and x['password'] == passowrd:
+#                     a = x
+#                     break
         
-            if a is None:
-                messages.info(request,'Credentials Invalid')
-                return redirect ('adminLogin')
+#             if a is None:
+#                 messages.info(request,'Credentials Invalid')
+#                 return redirect ('adminLogin')
 
-            for y in ys:
-                if y['user'] == username:
-                    b = y 
-                    break       
+#             for y in ys:
+#                 if y['user'] == username:
+#                     b = y 
+#                     break       
     
-            a = dict(a)
-            b = dict(b)
+#             a = dict(a)
+#             b = dict(b)
     
-            return render(request,'admin.html')
-        else:
-            return render(request,'adminLogin.html')
+#             return render(request,'admin.html')
+#         else:
+#             return render(request,'adminLogin.html')
+
+def admin(request,zs):
+    return render(request,'adminDashboard.html',{'zs':zs})
