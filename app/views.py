@@ -105,6 +105,7 @@ def studentLogin(request):
             return JsonResponse(a,safe=False)
         else:
             messages.info(request,'Credentials Invalid')
+            return JsonResponse(serializer.data,safe=False)
             return redirect ('login')
 
   
