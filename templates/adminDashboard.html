@@ -1,0 +1,22 @@
+<h5>   {{len(zs)}}</h5>
+
+<table>
+    <tr>
+        <th>ComplainID</th>
+        <th>Date</th>
+        <th>Details</th>
+        <th>Status</th>
+        <th>Student</th>
+        <th>Admin</th>
+    </tr>
+    {% for z in zs %} 
+   <tr>
+        <td>{{z.complainID}}</td>
+        <td>z.date</td>
+        <td>z.details</td>
+        <td>z.status</td>
+        <td>z.student</td>
+        <td>z.admin</td>
+    </tr>
+    {% endfor %}
+</table>

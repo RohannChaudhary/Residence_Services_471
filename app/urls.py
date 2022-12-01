@@ -6,6 +6,6 @@ urlpatterns = [
     path('login', views.studentLogin ,name='login'),
     path('index',views.index,name='index'),
     path('maintenanceRequest', views.maintenanceRequest ,name='maintenanceRequest'),
-    path('adminLogin', views.adminLogin , name = 'adminLogin')
+    path('adminDashboard',views.admin,name='admin')
     # path('student/<str:username>', views.post, name = 'post')
 ]

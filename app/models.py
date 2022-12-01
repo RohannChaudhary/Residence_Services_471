@@ -125,8 +125,8 @@ class Complain(models.Model):
     )
     complainID = models.AutoField(primary_key=True)
     date = models.DateTimeField(auto_now_add=True, blank=True)
-    student = models.OneToOneField('Student',on_delete=models.SET_NULL,null=True)
-    admin = models.OneToOneField('Admin',on_delete=models.SET_NULL ,null=True)
+    student = models.ForeignKey('Student',on_delete=models.SET_NULL,null=True)
+    admin = models.ForeignKey('Admin',on_delete=models.SET_NULL ,null=True)
     details = models.CharField(max_length=1000)
     status = models.CharField(max_length=20, choices=STATUS, default='NOT RESOLVED')
 
