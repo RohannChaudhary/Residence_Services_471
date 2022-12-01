@@ -5,6 +5,7 @@ urlpatterns = [
     path('',views.index,name='index'),
     path('login', views.studentLogin ,name='login'),
     path('index',views.index,name='index'),
-    path('maintenanceRequest', views.maintenanceRequest ,name='maintenanceRequest')
+    path('maintenanceRequest', views.maintenanceRequest ,name='maintenanceRequest'),
+    path('adminLogin', views.adminLogin , name = 'adminLogin')
     # path('student/<str:username>', views.post, name = 'post')
 ]

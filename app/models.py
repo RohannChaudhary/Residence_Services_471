@@ -65,22 +65,22 @@ class Student(models.Model):
 # Staff model
 class Staff(models.Model):
     user = models.OneToOneField('Person', primary_key=True, on_delete=models.CASCADE)
-    def __str__(self):
-        return self.username
+    # def __str__(self):
+    #     return self.user
 
 # Technician model
 class Technician(Staff):
     specialization = models.CharField(max_length=100, null=True)
-    def __str__(self):
-        return str(self.user) + '(' + self.specialization + ')'  
+    # def __str__(self):
+    #     return str(str(self.user) + '(' + self.specialization + ')')  
 
 # Admin model
 class Admin(Staff):
     position = models.CharField(max_length=100, null=True)
-    def __str__(self):
-        # list_display = [field.name for field in Admin._meta.get_fields()]
-        # return list_display
-        return str(self.user) + '(' + self.position + ')'  
+    # def __str__(self):
+    #     # list_display = [field.name for field in Admin._meta.get_fields()]
+    #     # return list_display
+    #     return str(self.user) + '(' + self.position + ')'  
 
 
 # Building model

@@ -4,7 +4,7 @@ from . import models
 class PersonSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Person
-        fields = ['username','email','password','first_name','last_name']
+        fields = '__all__'
 
 class StudentSerializer(serializers.ModelSerializer):
     class Meta:
@@ -20,6 +20,7 @@ class AdminSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Admin
         fields = '__all__'
+        
 
 class TechnicianSerializer(serializers.ModelSerializer):
     class Meta:
