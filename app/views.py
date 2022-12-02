@@ -87,7 +87,8 @@ def studentLogin(request):
             for y in ys:
                 if y['user'] == username:
                     b = y 
-                    break     
+                    break 
+                 
    
             complain = models.Complain.objects.all()
             complainSerializer = ComplainSerializer(complain,many=True)
@@ -96,10 +97,8 @@ def studentLogin(request):
             zs = json.loads(complainContent)
             
             zs_dict = [z for z in zs if z['admin'] == username]
-            
-            zs_out = json.dumps(zs_dict)
-                            
-            return render(request,'adminDashboard.html',{'zs':zs_out})
+                           
+            return render(request,'adminDashboard.html',{'zs':zs_dict})
     
         elif(a['is_technician']):
             return JsonResponse(a,safe=False)
@@ -144,7 +143,8 @@ def maintenanceRequest(request):
                 break
 
         if(student is not None and room is not None):
-            m = models.Maintenance(studentID = student, date = date.today(), room = room, details = details, status = 'NOT RESOLVED')
+            detailsAdd = username + " RoomNo: " + room + "Building ID:" + building
+            m = models.Maintenance(studentID = student, date = date.today(), room = room, details = details + "\n" + detailsAdd, status = 'NOT RESOLVED')
             m.save_base()
             messages.info(request,'Maintenance Request Submitted')
             return redirect('maintenanceRequest')
@@ -154,50 +154,5 @@ def maintenanceRequest(request):
     else:
         return render(request,'maintenanceRequest.html')
     
-# def adminLogin(request):
-#         if request.method == 'POST':
-#             username = request.POST['username1']
-#             passowrd = request.POST['password1']
-
-#             admin = models.Admin.objects.all()
-#             serializer = StudentSerializer(admin,many=True)
-#             content = JSONRenderer().render(serializer.data)
-            
-#             staff = models.Staff.objects.all()
-#             adminSerializer = StaffSerializer(staff,many=True)
-#             adminContent = JSONRenderer().render(adminSerializer.data)
-
-#             person = models.Person.objects.all()
-#             personSerializer = PersonSerializer(person,many=True)
-#             personContent = JSONRenderer().render(personSerializer.data)
-
-#             ys = json.loads(content)
-#             xs = json.loads(personContent)
-#             zs = json.loads(adminSerializer)
-            
-#             a = xs
-#             b = ys
-        
-#             for x in xs:
-#                 if x['username'] == username and x['password'] == passowrd:
-#                     a = x
-#                     break
-        
-#             if a is None:
-#                 messages.info(request,'Credentials Invalid')
-#                 return redirect ('adminLogin')
-
-#             for y in ys:
-#                 if y['user'] == username:
-#                     b = y 
-#                     break       
-    
-#             a = dict(a)
-#             b = dict(b)
-    
-#             return render(request,'admin.html')
-#         else:
-#             return render(request,'adminLogin.html')
-
 def admin(request,zs):
     return render(request,'adminDashboard.html',{'zs':zs})
