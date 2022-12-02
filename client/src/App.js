@@ -1,6 +1,6 @@
 import Login from "./components/HomePage/Login";
-import Homie from "./components/Home"
 import { createBrowserRouter, RouterProvider, Route } from "react-router-dom";
+import Fairy from "./components/Fairy";
 
 function App() {
   const router = createBrowserRouter([
@@ -9,8 +9,8 @@ function App() {
       element: <Login />,
     },
     {
-      path: "/home",
-      element: <Homie />,
+      path: "/Fairy",
+      element: <Fairy />,
     },
   ]);
   return (
