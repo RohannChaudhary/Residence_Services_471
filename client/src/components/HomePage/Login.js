@@ -1,6 +1,29 @@
 import React from "react";
+import { useState } from "react";
+
+async function loginUser(credentials) {
+  return fetch('http://localhost:3000/studentdashboard', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(credentials)
+  })
+    .then(data => data.json())
+ }
 
 const Login = () => {
+  const [username, setUserName] = useState();
+  const [password, setPassword] = useState();
+
+  const handleSubmit = async e => {
+    e.preventDefault();
+    const token = await loginUser({
+      username,
+      password
+    });
+  }
+
   return (
     <>
       <div className="flex h-screen">
@@ -35,6 +58,7 @@ const Login = () => {
                         autoComplete="email"
                         required
                         className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                        onChange={e => setUserName(e.target.value)}
                       />
                     </div>
                   </div>
@@ -54,6 +78,7 @@ const Login = () => {
                         autoComplete="current-password"
                         required
                         className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                        onChange={e => setPassword(e.target.value)}
                       />
                     </div>
                   </div>
@@ -61,6 +86,7 @@ const Login = () => {
                   <div>
                     <button
                       type="submit"
+                      onSubmit={handleSubmit}
                       className="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                     >
                       Sign in
