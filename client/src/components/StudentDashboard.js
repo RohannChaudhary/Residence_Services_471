@@ -3,16 +3,16 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
 const user = {
-  name: "User",
+  name: "Tom Cook",
   email: "tom@example.com",
   imageUrl:
     "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
 };
 const navigation = [
-  { name: "Complaints", href: "http://localhost:3000/complaints", current: true },
-  { name: "Profile", href: "http://localhost:3000/profile", current: false },
-  { name: "Maintenance", href: "http://localhost:3000/maintenance", current: false },
-  { name: "Dashboard", href: "http://localhost:3000/dashboard", current: false },
+  { name: "Dashboard", href: "http://localhost:3000/studentdashboard", current: true },
+  { name: "Maintenance", href: "http://localhost:3000/studentdashboard/maintenance", current: false },
+  // { name: "Profile", href: "http://localhost:3000/profile", current: false },
+  { name: "Complaints", href: "http://localhost:3000/studentdashboard/complaints", current: false },
 ];
 const userNavigation = [
   // { name: "Your Profile", href: "#" },
@@ -24,7 +24,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Complaints() {
+export default function StudentDashboard() {
   return (
     <>
       {/*
@@ -201,7 +201,7 @@ export default function Complaints() {
           <header>
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <h1 className="text-3xl font-bold leading-tight tracking-tight text-gray-900">
-                Student Complaints:
+                Dashboard
               </h1>
             </div>
           </header>

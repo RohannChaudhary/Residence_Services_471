@@ -1,9 +1,12 @@
 import Login from "./components/HomePage/Login";
 import { createBrowserRouter, RouterProvider, Route } from "react-router-dom";
-import Maintenance from "./components/Maintenance";
-import Profile from "./components/Profile";
-import Dashboard from "./components/Dashboard";
-import Complaints from "./components/Complaints";
+import StudentDashboard from "./components/StudentDashboard";
+import StudentMaintenance from "./components/StudentMaintenance";
+import StudentComplaints from "./components/StudentComplaints";
+import AdminDashboard from "./components/AdminDashboard";
+import AdminComplaints from "./components/AdminComplaints";
+import TechDashboard from "./components/TechDashboard";
+import TechMaintenance from "./components/TechMaintenance";
 
 function App() {
   const router = createBrowserRouter([
@@ -12,20 +15,32 @@ function App() {
       element: <Login />,
     },
     {
-      path: "/dashboard",
-      element: <Dashboard />,
+      path: "/studentdashboard",
+      element: <StudentDashboard />,
     },
     {
-      path: "/Maintenance",
-      element: <Maintenance />,
+      path: "/studentdashboard/Maintenance",
+      element: <StudentMaintenance />,
     },
     {
-      path: "/Profile",
-      element: <Profile />,
+      path: "/studentdashboard/complaints",
+      element: <StudentComplaints />,
     },
     {
-      path: "/complaints",
-      element: <Complaints />,
+      path: "/admindashboard",
+      element: <AdminDashboard />,
+    },
+    {
+      path: "/admindashboard/complaints",
+      element: <AdminComplaints />,
+    },
+    {
+      path: "/techdashboard",
+      element: <TechDashboard />,
+    },
+    {
+      path: "/techdashboard/maintenance",
+      element: <TechMaintenance />,
     },
   ]);
   return (
