@@ -1,8 +1,9 @@
 import Login from "./components/HomePage/Login";
 import { createBrowserRouter, RouterProvider, Route } from "react-router-dom";
-import Fairy from "./components/Fairy";
 import Maintenance from "./components/Maintenance";
 import Profile from "./components/Profile";
+import Dashboard from "./components/Dashboard";
+import Complaints from "./components/Complaints";
 
 function App() {
   const router = createBrowserRouter([
@@ -11,8 +12,8 @@ function App() {
       element: <Login />,
     },
     {
-      path: "/Fairy",
-      element: <Fairy />,
+      path: "/dashboard",
+      element: <Dashboard />,
     },
     {
       path: "/Maintenance",
@@ -21,6 +22,10 @@ function App() {
     {
       path: "/Profile",
       element: <Profile />,
+    },
+    {
+      path: "/complaints",
+      element: <Complaints />,
     },
   ]);
   return (

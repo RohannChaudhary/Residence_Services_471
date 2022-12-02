@@ -9,13 +9,14 @@ const user = {
     "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
 };
 const navigation = [
-  { name: "Dashboard", href: "http://localhost:3000/fairy#", current: true },
+  { name: "Dashboard", href: "http://localhost:3000/dashboard", current: true },
   { name: "Maintenance", href: "http://localhost:3000/maintenance", current: false },
   { name: "Profile", href: "http://localhost:3000/profile", current: false },
+  { name: "Complaints", href: "http://localhost:3000/complaints", current: false },
 ];
 const userNavigation = [
-  { name: "Your Profile", href: "#" },
-  { name: "Settings", href: "#" },
+  // { name: "Your Profile", href: "#" },
+  // { name: "Settings", href: "#" },
   { name: "Sign out", href: "http://localhost:3000" },
 ];
 
@@ -23,7 +24,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Fairy() {
+export default function Dashboard() {
   return (
     <>
       {/*
@@ -170,13 +171,13 @@ export default function Fairy() {
                         {user.email}
                       </div>
                     </div>
-                    <button
+                    {/* <button
                       type="button"
                       className="ml-auto flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                     >
                       <span className="sr-only">View notifications</span>
                       <BellIcon className="h-6 w-6" aria-hidden="true" />
-                    </button>
+                    </button> */}
                   </div>
                   <div className="mt-3 space-y-1">
                     {userNavigation.map((item) => (
