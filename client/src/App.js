@@ -2,9 +2,9 @@ import Login from "./components/HomePage/Login";
 import { createBrowserRouter, RouterProvider, Route } from "react-router-dom";
 import StudentDashboard from "./components/StudentDashboard";
 import StudentMaintenance from "./components/StudentMaintenance";
-import StudentComplaints from "./components/StudentComplaints";
+import StudentComplains from "./components/StudentComplains";
 import AdminDashboard from "./components/AdminDashboard";
-import AdminComplaints from "./components/AdminComplaints";
+import AdminComplains from "./components/AdminComplains";
 import TechDashboard from "./components/TechDashboard";
 import TechMaintenance from "./components/TechMaintenance";
 
@@ -23,16 +23,16 @@ function App() {
       element: <StudentMaintenance />,
     },
     {
-      path: "/studentdashboard/complaints",
-      element: <StudentComplaints />,
+      path: "/studentdashboard/complains",
+      element: <StudentComplains />,
     },
     {
       path: "/admindashboard",
       element: <AdminDashboard />,
     },
     {
-      path: "/admindashboard/complaints",
-      element: <AdminComplaints />,
+      path: "/admindashboard/complains",
+      element: <AdminComplains />,
     },
     {
       path: "/techdashboard",

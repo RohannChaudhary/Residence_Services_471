@@ -10,7 +10,7 @@ const user = {
 };
 const navigation = [
   { name: "Dashboard", href: "http://localhost:3000/techdashboard", current: false },
-  { name: "Complaints", href: "http://localhost:3000/techdashboard/maintenance", current: true },
+  { name: "Maintenance", href: "http://localhost:3000/techdashboard/maintenance", current: true },
 ];
 const userNavigation = [
   // { name: "Your Profile", href: "#" },
@@ -199,7 +199,7 @@ export default function TechMaintenance() {
           <header>
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <h1 className="text-3xl font-bold leading-tight tracking-tight text-gray-900">
-                Outstanding Complaints:
+                Outstanding Maintenance Requests:
               </h1>
             </div>
           </header>

@@ -10,7 +10,7 @@ const user = {
 };
 const navigation = [
   { name: "Dashboard", href: "http://localhost:3000/techdashboard", current: true },
-  { name: "Complaints", href: "http://localhost:3000/techdashboard/maintenance", current: false },
+  { name: "maintenance", href: "http://localhost:3000/techdashboard/maintenance", current: false },
 ];
 const userNavigation = [
   // { name: "Your Profile", href: "#" },

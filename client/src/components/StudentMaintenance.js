@@ -12,7 +12,7 @@ const navigation = [
   { name: "Maintenance", href: "http://localhost:3000/studentdashboard/maintenance", current: true },
   { name: "Dashboard", href: "http://localhost:3000/studentdashboard", current: false },
   // { name: "Profile", href: "http://localhost:3000/profile", current: false },
-  { name: "Complaints", href: "http://localhost:3000/studentdashboard/complaints", current: false },
+  { name: "Complains", href: "http://localhost:3000/studentdashboard/complains", current: false },
 ];
 const userNavigation = [
   // { name: "Your Profile", href: "#" },
