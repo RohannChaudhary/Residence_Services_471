@@ -10,7 +10,7 @@ const user = {
 };
 const navigation = [
   { name: "Dashboard", href: "http://localhost:3000/admindashboard", current: true },
-  { name: "Complaints", href: "http://localhost:3000/admindashboard/complaints", current: false },
+  { name: "Complains", href: "http://localhost:3000/admindashboard/complains", current: false },
 ];
 const userNavigation = [
   // { name: "Your Profile", href: "#" },

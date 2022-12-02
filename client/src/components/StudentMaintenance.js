@@ -9,10 +9,10 @@ const user = {
     "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
 };
 const navigation = [
-  { name: "Maintenance", href: "http://localhost:3000/studentdashboard/maintenance", current: true },
   { name: "Dashboard", href: "http://localhost:3000/studentdashboard", current: false },
+  { name: "Maintenance", href: "http://localhost:3000/studentdashboard/maintenance", current: true },
   // { name: "Profile", href: "http://localhost:3000/profile", current: false },
-  { name: "Complaints", href: "http://localhost:3000/studentdashboard/complaints", current: false },
+  { name: "Complains", href: "http://localhost:3000/studentdashboard/complains", current: false },
 ];
 const userNavigation = [
   // { name: "Your Profile", href: "#" },
@@ -23,6 +23,10 @@ const userNavigation = [
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
+
+const Maintenance = [
+  { UCID: '30113420', date: 'Nov. 23. 2022', maintenances: 'My bathroom floor is cracking, the moisture is seeping through and the kitchen has holes in the wall and I am testing this so I will keep adding text to see text resizing options an dsuch'},
+]
 
 export default function StudentMaintenance() {
   return (
@@ -197,26 +201,58 @@ export default function StudentMaintenance() {
           )}
         </Disclosure>
 
-        <div className="py-10">
-          <header>
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-              <h1 className="text-3xl font-bold leading-tight tracking-tight text-gray-900">
-                Maintenance
-              </h1>
-            </div>
-          </header>
-          <main>
-            <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
-              {/* Replace with your content */
-                
-              }
-              <div className="px-4 py-8 sm:px-0">
-                <div className="h-screen rounded-lg border-4 border-dashed border-gray-200" />
-              </div>
-              {/* /End replace */}
-            </div>
-          </main>
+        <div className="px-4 sm:px-6 lg:px-8 mt-16">
+      <div className="sm:flex sm:items-center">
+        <div className="sm:flex-auto">
+          <h1 className="text-xl font-semibold text-gray-900">Personal Maintenance Requests</h1>
+          <p className="mt-2 text-sm text-gray-700">
+            A list of all your active and past maintenance requests.
+          </p>
         </div>
+        <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
+          <button
+            type="button"
+            className="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
+          >
+            Add Maintenance Request
+          </button>
+        </div>
+      </div>
+      <div className="mt-8 flex flex-col">
+        <div className="-my-2 -mx-4 sm:-mx-6 lg:-mx-8 max-w-full">
+          <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+            <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
+              <table className="divide-y divide-gray-300 max-w-96 overflow-hidden">
+                <thead className="bg-gray-50">
+                  <tr className="divide-x divide-gray-200">
+                    <th scope="col" className="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 sm:pl-6">
+                      UCID
+                    </th>
+                    <th scope="col" className="px-4 py-3.5 text-left text-sm font-semibold text-gray-900">
+                      Date Submitted
+                    </th>
+                    <th scope="col" className="px-4 py-3.5 text-left text-sm font-semibold text-gray-900">
+                      Description
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-200 bg-white max-w-full">
+                  {Maintenance.map((MaintainRequest) => (
+                    <tr key={MaintainRequest.UCID} className="divide-x divide-gray-200 max-w-96 overflow-hidden">
+                      <td className="whitespace-nowrap py-4 pl-4 pr-4 text-sm font-medium text-gray-900 sm:pl-6">
+                        {MaintainRequest.UCID}
+                      </td>
+                      <td className="whitespace-nowrap p-4 text-sm text-gray-500">{MaintainRequest.date}</td>
+                      <td className="p-4 text-sm text-gray-500">{MaintainRequest.maintenances}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
       </div>
     </>
   );
