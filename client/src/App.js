@@ -1,8 +1,12 @@
 import Login from "./components/HomePage/Login";
 import { createBrowserRouter, RouterProvider, Route } from "react-router-dom";
-import Fairy from "./components/Fairy";
-import Maintenance from "./components/Maintenance";
-import Profile from "./components/Profile";
+import StudentDashboard from "./components/StudentDashboard";
+import StudentMaintenance from "./components/StudentMaintenance";
+import StudentComplains from "./components/StudentComplains";
+import AdminDashboard from "./components/AdminDashboard";
+import AdminComplains from "./components/AdminComplains";
+import TechDashboard from "./components/TechDashboard";
+import TechMaintenance from "./components/TechMaintenance";
 
 function App() {
   const router = createBrowserRouter([
@@ -11,16 +15,32 @@ function App() {
       element: <Login />,
     },
     {
-      path: "/Fairy",
-      element: <Fairy />,
+      path: "/studentdashboard",
+      element: <StudentDashboard />,
     },
     {
-      path: "/Maintenance",
-      element: <Maintenance />,
+      path: "/studentdashboard/Maintenance",
+      element: <StudentMaintenance />,
     },
     {
-      path: "/Profile",
-      element: <Profile />,
+      path: "/studentdashboard/complains",
+      element: <StudentComplains />,
+    },
+    {
+      path: "/admindashboard",
+      element: <AdminDashboard />,
+    },
+    {
+      path: "/admindashboard/complains",
+      element: <AdminComplains />,
+    },
+    {
+      path: "/techdashboard",
+      element: <TechDashboard />,
+    },
+    {
+      path: "/techdashboard/maintenance",
+      element: <TechMaintenance />,
     },
   ]);
   return (

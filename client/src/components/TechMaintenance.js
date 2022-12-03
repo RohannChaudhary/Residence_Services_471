@@ -3,19 +3,18 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
 const user = {
-  name: "Tom Cook",
+  name: "User",
   email: "tom@example.com",
   imageUrl:
     "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
 };
 const navigation = [
-  { name: "Maintenance", href: "http://localhost:3000/maintenance", current: true },
-  { name: "Dashboard", href: "http://localhost:3000/fairy#", current: false },
-  { name: "Profile", href: "http://localhost:3000/profile", current: false },
+  { name: "Dashboard", href: "http://localhost:3000/techdashboard", current: false },
+  { name: "Maintenance", href: "http://localhost:3000/techdashboard/maintenance", current: true },
 ];
 const userNavigation = [
-  { name: "Your Profile", href: "#" },
-  { name: "Settings", href: "#" },
+  // { name: "Your Profile", href: "#" },
+  // { name: "Settings", href: "#" },
   { name: "Sign out", href: "http://localhost:3000" },
 ];
 
@@ -23,7 +22,11 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Maintenance() {
+const Maintenance = [
+  { UCID: '30113420', date: 'Nov. 23. 2022', maintenances: 'My bathroom floor is cracking, the moisture is seeping through and the kitchen has holes in the wall and I am testing this so I will keep adding text to see text resizing options an dsuch'},
+]
+
+export default function TechMaintenance() {
   return (
     <>
       {/*
@@ -170,13 +173,13 @@ export default function Maintenance() {
                         {user.email}
                       </div>
                     </div>
-                    <button
+                    {/* <button
                       type="button"
                       className="ml-auto flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                     >
                       <span className="sr-only">View notifications</span>
                       <BellIcon className="h-6 w-6" aria-hidden="true" />
-                    </button>
+                    </button> */}
                   </div>
                   <div className="mt-3 space-y-1">
                     {userNavigation.map((item) => (
@@ -196,26 +199,94 @@ export default function Maintenance() {
           )}
         </Disclosure>
 
-        <div className="py-10">
-          <header>
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-              <h1 className="text-3xl font-bold leading-tight tracking-tight text-gray-900">
-                Maintenance
-              </h1>
-            </div>
-          </header>
-          <main>
-            <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
-              {/* Replace with your content */
-                
-              }
-              <div className="px-4 py-8 sm:px-0">
-                <div className="h-screen rounded-lg border-4 border-dashed border-gray-200" />
-              </div>
-              {/* /End replace */}
-            </div>
-          </main>
+        <div className="px-4 sm:px-6 lg:px-8 mt-16">
+      <div className="sm:flex sm:items-center">
+        <div className="sm:flex-auto">
+          <h1 className="text-xl font-semibold text-gray-900">Outstanding Maintenance Requests</h1>
+          <p className="mt-2 text-sm text-gray-700">
+            A list of all active student maintenance requests.
+          </p>
         </div>
+      </div>
+      <div className="mt-8 flex flex-col">
+        <div className="-my-2 -mx-4 sm:-mx-6 lg:-mx-8 max-w-full">
+          <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+            <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
+              <table className="divide-y divide-gray-300 max-w-96 overflow-hidden">
+                <thead className="bg-gray-50">
+                  <tr className="divide-x divide-gray-200">
+                    <th scope="col" className="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 sm:pl-6">
+                      UCID
+                    </th>
+                    <th scope="col" className="px-4 py-3.5 text-left text-sm font-semibold text-gray-900">
+                      Date Submitted
+                    </th>
+                    <th scope="col" className="px-4 py-3.5 text-left text-sm font-semibold text-gray-900">
+                      Description
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-200 bg-white max-w-full">
+                  {Maintenance.map((MaintainRequest) => (
+                    <tr key={MaintainRequest.UCID} className="divide-x divide-gray-200 max-w-96 overflow-hidden">
+                      <td className="whitespace-nowrap py-4 pl-4 pr-4 text-sm font-medium text-gray-900 sm:pl-6">
+                        {MaintainRequest.UCID}
+                      </td>
+                      <td className="whitespace-nowrap p-4 text-sm text-gray-500">{MaintainRequest.date}</td>
+                      <td className="p-4 text-sm text-gray-500">{MaintainRequest.maintenances}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      <div className="px-4 sm:px-6 lg:px-8 mt-16">
+      <div className="sm:flex sm:items-center">
+        <div className="sm:flex-auto">
+          <h1 className="text-xl font-semibold text-gray-900">Maintenance Request History</h1>
+          <p className="mt-2 text-sm text-gray-700">
+            A list of all fullfilled student maintenance requests.
+          </p>
+        </div>
+      </div>
+      <div className="mt-8 flex flex-col">
+        <div className="-my-2 -mx-4 sm:-mx-6 lg:-mx-8 max-w-full">
+          <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+            <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
+              <table className="divide-y divide-gray-300 max-w-96 overflow-hidden">
+                <thead className="bg-gray-50">
+                  <tr className="divide-x divide-gray-200">
+                    <th scope="col" className="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 sm:pl-6">
+                      UCID
+                    </th>
+                    <th scope="col" className="px-4 py-3.5 text-left text-sm font-semibold text-gray-900">
+                      Date Submitted
+                    </th>
+                    <th scope="col" className="px-4 py-3.5 text-left text-sm font-semibold text-gray-900">
+                      Description
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-200 bg-white max-w-full">
+                  {Maintenance.map((MaintainRequest) => (
+                    <tr key={MaintainRequest.UCID} className="divide-x divide-gray-200 max-w-96 overflow-hidden">
+                      <td className="whitespace-nowrap py-4 pl-4 pr-4 text-sm font-medium text-gray-900 sm:pl-6">
+                        {MaintainRequest.UCID}
+                      </td>
+                      <td className="whitespace-nowrap p-4 text-sm text-gray-500">{MaintainRequest.date}</td>
+                      <td className="p-4 text-sm text-gray-500">{MaintainRequest.maintenances}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
       </div>
     </>
   );

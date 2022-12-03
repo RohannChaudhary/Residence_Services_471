@@ -3,19 +3,20 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
 const user = {
-  name: "Tom Cook",
+  name: "User",
   email: "tom@example.com",
   imageUrl:
     "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
 };
 const navigation = [
-  { name: "Profile", href: "http://localhost:3000/profile", current: true },
-  { name: "Maintenance", href: "http://localhost:3000/maintenance", current: false },
-  { name: "Dashboard", href: "http://localhost:3000/fairy#", current: false },
+  { name: "Dashboard", href: "http://localhost:3000/studentdashboard", current: false },
+  { name: "Maintenance", href: "http://localhost:3000/studentdashboard/maintenance", current: false },
+  // { name: "Profile", href: "http://localhost:3000/profile", current: false },
+  { name: "Complains", href: "http://localhost:3000/studentdashboard/complains", current: true },
 ];
 const userNavigation = [
-  { name: "Your Profile", href: "#" },
-  { name: "Settings", href: "#" },
+  // { name: "Your Profile", href: "#" },
+  // { name: "Settings", href: "#" },
   { name: "Sign out", href: "http://localhost:3000" },
 ];
 
@@ -23,7 +24,11 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Profile() {
+const people = [
+  { name: 'Fares Senajr', title: '3rd Year Student', email: 'Fares.senjar@ucalgary.com', role: 'Member' },
+]
+
+export default function StudentComplains() {
   return (
     <>
       {/*
@@ -170,13 +175,13 @@ export default function Profile() {
                         {user.email}
                       </div>
                     </div>
-                    <button
+                    {/* <button
                       type="button"
                       className="ml-auto flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                     >
                       <span className="sr-only">View notifications</span>
                       <BellIcon className="h-6 w-6" aria-hidden="true" />
-                    </button>
+                    </button> */}
                   </div>
                   <div className="mt-3 space-y-1">
                     {userNavigation.map((item) => (
@@ -196,26 +201,58 @@ export default function Profile() {
           )}
         </Disclosure>
 
-        <div className="py-10">
-          <header>
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-              <h1 className="text-3xl font-bold leading-tight tracking-tight text-gray-900">
-                Profile Information:
-              </h1>
-            </div>
-          </header>
-          <main>
-            <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
-              {/* Replace with your content */
-                
-              }
-              <div className="px-4 py-8 sm:px-0">
-                <div className="h-screen rounded-lg border-4 border-dashed border-gray-200" />
-              </div>
-              {/* /End replace */}
-            </div>
-          </main>
+      <div className="px-4 sm:px-6 lg:px-8 mt-16">
+      <div className="sm:flex sm:items-center">
+        <div className="sm:flex-auto">
+          <h1 className="text-xl font-semibold text-gray-900">Complains</h1>
+          <p className="mt-2 text-sm text-gray-700">
+            A list of all your active and past complains.
+          </p>
         </div>
+        <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
+          <button
+            type="button"
+            className="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
+          >
+            Submit Complaint
+          </button>
+        </div>
+      </div>
+      <div className="mt-8 flex flex-col">
+        <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
+          <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+            <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
+              <table className="min-w-full divide-y divide-gray-300">
+                <thead className="bg-gray-50">
+                  <tr className="divide-x divide-gray-200">
+                    <th scope="col" className="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 sm:pl-6">
+                      UCID
+                    </th>
+                    <th scope="col" className="px-4 py-3.5 text-left text-sm font-semibold text-gray-900">
+                      Role
+                    </th>
+                    <th scope="col" className="px-4 py-3.5 text-left text-sm font-semibold text-gray-900">
+                      Complains
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-200 bg-white">
+                  {people.map((person) => (
+                    <tr key={person.email} className="divide-x divide-gray-200">
+                      <td className="whitespace-nowrap py-4 pl-4 pr-4 text-sm font-medium text-gray-900 sm:pl-6">
+                        {person.name}
+                      </td>
+                      <td className="whitespace-nowrap p-4 text-sm text-gray-500">{person.title}</td>
+                      <td className="whitespace-nowrap p-4 text-sm text-gray-500">{person.email}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
       </div>
     </>
   );

@@ -97,7 +97,7 @@ def studentLogin(request):
             
             zs = json.loads(complainContent)
             
-            zs_dict = [z for z in zs if z['admin'] == username]
+            zs_dict = [z for z in zs if z['admin'] == username and z['status'] != 'RESOLVED']
                            
             return render(request,'adminDashboard.html',{'zs':zs_dict})
     
