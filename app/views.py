@@ -21,6 +21,7 @@ def studentLogin(request):
         passowrd = request.POST['password']
 
         person = models.Person.objects.all()
+        
         personSerializer = PersonSerializer(person,many=True)
         personContent = JSONRenderer().render(personSerializer.data)
 
@@ -101,7 +102,32 @@ def studentLogin(request):
             return render(request,'adminDashboard.html',{'zs':zs_dict})
     
         elif(a['is_technician']):
-            return JsonResponse(a,safe=False)
+            
+            staff = models.Staff.objects.all()
+            staffSerializer = StaffSerializer(staff,many=True)
+            staffContent = JSONRenderer().render(staffSerializer.data)
+            
+            technician = models.Technician.objects.all()
+            technicianSerializer = TechnicianSerializer(admin,many=True)
+            technicianContent = JSONRenderer().render(technicianSerializer.data)
+            
+            xs = json.loads(staffContent)
+            ys = json.loads(technicianContent)
+            
+            for y in ys:
+                if y['user'] == username:
+                    b = y 
+                    break 
+                
+            maintance = models.Maintenance.objects.all()
+            maintanceSerializer = MaintanceSerializer(maintance,many=True)
+            maintanceContent = JSONRenderer().render(maintanceSerializer.data)
+            
+            zs = json.loads(maintanceContent) 
+            
+            zs_dict = [z for z in zs if z['technician'] == username]
+            
+            return render(request,'technicianDashboard.html',{'zs':zs_dict})
         else:
             messages.info(request,'Credentials Invalid')
             return JsonResponse(serializer.data,safe=False)
@@ -153,6 +179,39 @@ def maintenanceRequest(request):
             return redirect('maintenanceRequest')
     else:
         return render(request,'maintenanceRequest.html')
+def complainRequest(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        admin = request.POST['admin']
+        details = request.POST['details']
+        building = request.POST['building']
+        
+        admin_list = list(models.Admin.objects.all())
+        student_list = list(models.Student.objects.all())
+        
+        student = models.Student()
+        admin = models.Admin()
+        for student1 in student_list:
+            if(student1.user == username):
+                student = student1
+                break
+
+        for admin1 in admin_list:
+            if admin1.position == admin:
+                admin  = admin1
+                break
+
+        if(student is not None and admin is not None):
+            detailsAdd = username
+            m = models.Complain(student = student, date = date.today(), admin = admin, details = details + "\n" + detailsAdd, status = 'NOT RESOLVED')
+            m.save_base()
+            messages.info(request,'Complain Submitted')
+            return redirect('complainRequest')
+        else:
+            messages.info(request,'Invalid Username')
+            return redirect('complainRequest')
+    else:
+        return render(request,'complainRequest.html')
     
 def admin(request,zs):
     return render(request,'adminDashboard.html',{'zs':zs})
