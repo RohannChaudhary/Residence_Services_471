@@ -147,9 +147,11 @@ def studentLogin(request):
 def maintenanceRequest(request):
     if request.method == 'POST':
         username = request.POST['username']
-        room = request.POST['room']
+        roomnumber = request.POST['room']
         details = request.POST['details']
         building = request.POST['building']
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
         
         # room1 = models.Room.objects.filter(roomNo = room , buildingID = building)
         # room = models.Room(room1)
@@ -159,18 +161,18 @@ def maintenanceRequest(request):
         student = models.Student()
         room= models.Room()
         for student1 in student_list:
-            if(student1.user == username):
+            if(str(student1.user) == username):
                 student = student1
                 break
 
         for room1 in room_list:
-            if room1.roomNo == room and room1.buildingID == building:
+            if str(room1.roomNo) == roomnumber and str(room1.buildingID) == building:
                 room = room1
                 break
 
         if(student is not None and room is not None):
-            detailsAdd = username + " RoomNo: " + room + "Building ID:" + building
-            m = models.Maintenance(studentID = student, date = date.today(), room = room, details = details + "\n" + detailsAdd, status = 'NOT RESOLVED')
+            detailsAdd = username + " RoomNo: " + str(roomnumber) + "Building ID:" + building
+            m = models.Maintenance(studentID = student, first_name = first_name, last_name = last_name, date = date.today(), room = room, details = details + "\n" + detailsAdd, status = 'NOT RESOLVED')
             m.save_base()
             messages.info(request,'Maintenance Request Submitted')
             return redirect('maintenanceRequest')

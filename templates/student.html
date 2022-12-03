@@ -341,12 +341,12 @@ h2 span {
       <div class="col-lg-4">
         <div class="card shadow-sm">
           <div class="card-header bg-transparent text-center">
-            <h3>Ishmam Ahasan Samin</h3>
+            <h3>{{a.first_name}} {{a.last_name}}</h3>
           </div>
           <div class="card-body">
-            <p class="mb-0"><strong class="pr-1">Student ID:</strong>321000001</p>
-            <p class="mb-0"><strong class="pr-1">Class:</strong>4</p>
-            <p class="mb-0"><strong class="pr-1">Section:</strong>A</p>
+            <p class="mb-0"><strong class="pr-1">Student ID:</strong>{{b.studentID}}</p>
+            <p class="mb-0"><strong class="pr-1">Major:</strong>{{b.major}}</p>
+            <p class="mb-0"><strong class="pr-1">Username:</strong>{{a.username}}</p>
           </div>
         </div>
       </div>
@@ -358,24 +358,24 @@ h2 span {
           <div class="card-body pt-0">
             <table class="table table-bordered">
               <tr>
-                <th width="30%">Roll</th>
+                <th width="30%">Email:</th>
                 <td width="2%">:</td>
-                <td>125</td>
+                <td>{{a.email}}</td>
               </tr>
               <tr>
-                <th width="30%">Academic Year	</th>
+                <th width="30%">Phone Number	</th>
                 <td width="2%">:</td>
-                <td>2020</td>
+                <td>{{a.phone_num}}</td>
               </tr>
               <tr>
                 <th width="30%">Gender</th>
                 <td width="2%">:</td>
-                <td>Male</td>
+                <td>{{b.gender}}</td>
               </tr>
               <tr>
-                <th width="30%">Religion</th>
+                <th width="30%">Food Plan</th>
                 <td width="2%">:</td>
-                <td>Group</td>
+                <td>{{b.type}}</td>
               </tr>
               <tr>
                 <th width="30%">blood</th>
@@ -411,35 +411,3 @@ h2 span {
 
 	</body>
 </html>
-
-{% comment %} 
-<style>
-    h5{
-        color: red;
-    }
-    button {
-        font: bold 11px Arial;
-        text-decoration: none;
-        background-color: #EEEEEE;
-        color: #333333;
-        padding: 2px 6px 2px 6px;
-        border-top: 1px solid #CCCCCC;
-        border-right: 1px solid #333333;
-        border-bottom: 1px solid #333333;
-        border-left: 1px solid #CCCCCC;
-    }
-    
-</style>
-{% for message in messages%}
-<h5>{{message}}</h5>
-{% endfor %}
-<h1>Student Username: {{a.username}}</h1><br>
-<h1>Student First Name: {{a.first_name}} </h1><br>
-<h1>Student Last Name: {{a.last_name}}</h1><br>
-<h1>Student Year Of Study: {{b.year}}</h1><br>
-<h1>Student Email: {{a.email}}</h1><br>
-<h3>Payment Due: {{amountDue}} </h2><br>
-
-
-<li><a class="button" href="maintenanceRequest">Maintenance Request</a></li>
-<li><a class="button" href="index">Log out</a></li> {% endcomment %}

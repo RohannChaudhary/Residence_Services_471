@@ -57,6 +57,9 @@ class Food_Plan(models.Model):
 class Student(models.Model):
     user = models.OneToOneField('Person', primary_key=True, on_delete=models.CASCADE)
     year = models.IntegerField()
+    major = models.CharField(max_length=30)
+    studentID = models.CharField(max_length=8)
+    gender = models.CharField(max_length=30)
     type = models.ForeignKey(Food_Plan,on_delete = models.SET_NULL, null = True)
     
     def __str__(self):
@@ -112,8 +115,10 @@ class Maintenance(models.Model):
     )
     maintenanceID = models.AutoField(primary_key=True)
     date = models.DateField(auto_now_add=True, blank=True)
-    studentID = models.OneToOneField('Student',on_delete=models.SET_NULL,null=True)
-    room = models.OneToOneField('Room',on_delete=models.SET_NULL,null=True)
+    studentID = models.ForeignKey('Student',on_delete=models.SET_NULL,null=True)
+    room = models.ForeignKey('Room',on_delete=models.SET_NULL,null=True)
+    first_name = models.CharField(max_length=30,default='100')
+    last_name = models.CharField(max_length=30,default='100')
     details = models.TextField()
     status = models.CharField(max_length=20, choices=STATUS, default='NOT RESOLVED')
 
