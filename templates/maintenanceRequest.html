@@ -113,15 +113,18 @@
 	box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.28);
 }
 body {
-    background-image: url('img_girl.jpg');
-    background-color : powderblue;
+    {% comment %} background-image: url('img_girl.jpg');
+    background-color : powderblue; {% endcomment %}
+    }
+    .image-background{
+        background-color: powderblue ;
     }
 </style> 
 
 {% for message in messages%}
 <h5>{{message}}</h5>
 {% endfor %}
-<body>
+<body class = "image-background" >
 <div class="form-style-10">
     <h1>Maintenance Request<span>Submit a request for maintenance!</span></h1>
     <form action = "maintenanceRequest" method = "POST">

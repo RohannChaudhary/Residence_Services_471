@@ -54,7 +54,20 @@ def studentLogin(request):
             for z in zs:
                 if z['studentID'] == username:
                     c = z
-                    break        
+                    break   
+                
+               
+            complain = models.Complain.objects.all()
+            complainSerializer = ComplainSerializer(complain,many=True)
+            complainContent = JSONRenderer().render(complainSerializer.data)
+            
+            complainss = json.loads(complainContent)
+            
+            studentPastComplain = [complain for complain in complainss if str(complain[student]) == username]   
+            
+      
+            
+                 
                 
         
             a = dict(a)
@@ -69,7 +82,7 @@ def studentLogin(request):
             #     amountDue = 10000
 
 
-            return render(request,'student.html',{'a':a, 'b':b})              
+            return render(request,'student.html',{'a':a, 'b':b, 'studentPastComplain': studentPastComplain})              
         
         elif(a['is_admin']):
             
@@ -98,8 +111,9 @@ def studentLogin(request):
             zs = json.loads(complainContent)
             
             zs_dict = [z for z in zs if z['admin'] == username and z['status'] != 'RESOLVED']
-                           
-            return render(request,'adminDashboard.html',{'zs':zs_dict})
+            ys_dict = [y for y in zs if y['admin'] == username and y['status'] == 'RESOLVED']               
+            
+            return render(request,'adminDashboard.html',{'zs':zs_dict, 'ys':ys_dict})
     
         elif(a['is_technician']):
             

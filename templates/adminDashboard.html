@@ -1,7 +1,5 @@
 <head><style>
-    #table{
-        opacity : 0;
-    }
+
     .div-table {
         display: table;         
         width: auto;         
@@ -24,31 +22,68 @@
 </head>
 <h3>{{zs}}</h3>
 <button type = "button" onclick= "changeStyle()">Complain 'IN PROGRESS' OR 'NOT RESOLVED'</button>
+<button type = "button" onclick= "changeStyle1()">Complain 'RESOLVED'</button>
 <body>
     <form id="form1">
-        <div class="div-table" id="table">
+
+        {% comment %} <div class="div-table" id="table1">
                <div class="div-table-row">
                   <div class="div-table-col">Complain ID</div>
                   <div  class="div-table-col">Student Username</div>
                   <div  class="div-table-col">Date</div>
                   <div  class="div-table-col">Details</div>
                </div>
-               {%for z in zs%}
+               {%for y in ys %}
                <div class="div-table-row">
-                  <div class="div-table-col">{{z.complainID}}</div>
-                  <div class="div-table-col">{{z.student}}</div>
-                  <div class="div-table-col">{{z.date}}</div>
-                  <div class="div-table-col">{{z.details}}</div>
+                  <div class="div-table-col">{{y.complainID}}</div>
+                  <div class="div-table-col">{{y.student}}</div>
+                  <div class="div-table-col">{{y.date}}</div>
+                  <div class="div-table-col">{{y.details}}</div>
                </div>
                {%endfor%}
         </div>
+        {% endif %} {% endcomment %}
     </form>
   </body>
   
 <script>
     function changeStyle(){
-        var element =  document.getElementById("table");
-        element.style.opacity = "1";
+        var element =  document.getElementById("form1");
+        element.innerHTML =        `  <div class="div-table" id="table">
+            <div class="div-table-row">
+               <div class="div-table-col">Complain ID</div>
+               <div  class="div-table-col">Student Username</div>
+               <div  class="div-table-col">Date</div>
+               <div  class="div-table-col">Details</div>
+            </div>
+            {%for z in zs%}
+            <div class="div-table-row">
+               <div class="div-table-col">{{z.complainID}}</div>
+               <div class="div-table-col">{{z.student}}</div>
+               <div class="div-table-col">{{z.date}}</div>
+               <div class="div-table-col">{{z.details}}</div>
+            </div>
+            {%endfor%}
+            </div> ` ;
+    }
+    function changeStyle1(){
+        var element =  document.getElementById("form1");
+        element.innerHTML =         ` <div class="div-table" id="table">
+            <div class="div-table-row">
+               <div class="div-table-col">Complain ID</div>
+               <div  class="div-table-col">Student Username</div>
+               <div  class="div-table-col">Date</div>
+               <div  class="div-table-col">Details</div>
+            </div>
+            {%for z in ys%}
+            <div class="div-table-row">
+               <div class="div-table-col">{{z.complainID}}</div>
+               <div class="div-table-col">{{z.student}}</div>
+               <div class="div-table-col">{{z.date}}</div>
+               <div class="div-table-col">{{z.details}}</div>
+            </div>
+            {%endfor%}
+            </div> ` ;
     }
 </script>
 {% comment %} <h5>{{z5}}</h5>
