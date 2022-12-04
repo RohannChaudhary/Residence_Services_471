@@ -195,6 +195,7 @@ def maintenanceRequest(request):
             return redirect('maintenanceRequest')
     else:
         return render(request,'maintenanceRequest.html')
+
 def complainRequest(request):
     if request.method == 'POST':
         username = request.POST['username']
