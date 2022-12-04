@@ -31,7 +31,10 @@ def studentLogin(request):
             if x['username'] == username and x['password'] == passowrd:
                 a = x
                 break
-
+            
+        
+                
+        
         if(a['is_student']):
             
             student = models.Student.objects.all()
@@ -61,13 +64,10 @@ def studentLogin(request):
             complainSerializer = ComplainSerializer(complain,many=True)
             complainContent = JSONRenderer().render(complainSerializer.data)
             
-            complainss = json.loads(complainContent)
+            complains = json.loads(complainContent)
             
-            studentPastComplain = [complain for complain in complainss if str(complain[student]) == username]   
+            studentComplains = [z for z in complains if z['student'] == username]
             
-      
-            
-                 
                 
         
             a = dict(a)
@@ -82,7 +82,7 @@ def studentLogin(request):
             #     amountDue = 10000
 
 
-            return render(request,'student.html',{'a':a, 'b':b, 'studentPastComplain': studentPastComplain})              
+            return render(request,'student.html',{'a':a, 'b':b})              
         
         elif(a['is_admin']):
             
