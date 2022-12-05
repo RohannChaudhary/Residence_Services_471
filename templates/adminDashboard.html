@@ -437,6 +437,67 @@ h2 span {
       background-color: #0064bd;
       box-shadow: none;
     }
+
+    .container{
+      padding: 1rem;
+      margin: 1rem;
+    }
+    .table-scroll{
+      /*width:100%; */
+      display: block;
+      empty-cells: show;
+      
+      /* Decoration */
+      border-spacing: 0;
+      border: 1px solid;
+    }
+    
+    .table-scroll thead{
+      background-color: #f1f1f1;  
+      position:relative;
+      display: block;
+      width:100%;
+      overflow-y: scroll;
+    }
+    
+    .table-scroll tbody{
+      /* Position */
+      display: block; position:relative;
+      width:100%; overflow-y:scroll;
+      /* Decoration */
+      border-top: 1px solid rgba(0,0,0,0.2);
+    }
+    
+    .table-scroll tr{
+      width: 100%;
+      display:flex;
+    }
+    
+    .table-scroll td,.table-scroll th{
+      flex-basis:100%;
+      flex-grow:2;
+      display: block;
+      padding: 1rem;
+      text-align:left;
+    }
+    
+    /* Other options */
+    
+    .table-scroll.small-first-col td:first-child,
+    .table-scroll.small-first-col th:first-child{
+      flex-basis:20%;
+      flex-grow:1;
+    }
+    
+    .table-scroll tbody tr:nth-child(2n){
+      background-color: rgba(130,130,170,0.1);
+    }
+    
+    .body-half-screen{
+      max-height: 50vh;
+    }
+    
+    .small-col{flex-basis:10%;}
 }
 </style>
 <!DOCTYPE html>
@@ -481,7 +542,7 @@ h2 span {
       <div class="col-lg-4">
         <div class="card shadow-sm" style = "background-color: #b3cde0">
           <div class="card-header bg-transparent text-center">
-            <h3>{{a.first_name}} {{a.last_name}}</h3>
+            <h3 style = "font-weight : bold;">{{a.first_name}} {{a.last_name}}</h3>
           </div>
           <div class="card-body">
             <p class="mb-0"><strong class="pr-1">Admin ID:</strong>{{b.adminID}}</p>
@@ -493,7 +554,7 @@ h2 span {
       <div class="col-lg-8">
         <div class="card shadow-sm" style = "background-color: #b3cde0">
           <div class="card-header bg-transparent border-0">
-            <h3 class="mb-0"><i class="far fa-clone pr-1"></i>General Information</h3>
+            <h3 class="mb-0"><i class="far fa-clone pr-1"></i><strong>General Information</strong></h3>
           </div>
           <div class="card-body pt-0">
             <table class="table table-bordered">
@@ -517,15 +578,15 @@ h2 span {
           </div>
         </div>
           <div style="height: 26px"></div>
-        <div class="card shadow-sm" style = "background-color: #b3cde0">
-          <div class="card-header bg-transparent border-0">
-            <h3 class="mb-0"><i class="far fa-clone pr-1"></i>Other Information</h3>
-          </div>
-          <div class="card-body pt-0">
-              <p>To submit a new maintenance request, click on the button below</p>
-              <button style= 'margin-bottom:10px'class="button-7" role="button" onclick="location.href = 'maintenanceRequest'; ">Submit Maintenance Request</button>
-              <p>To file a complain, click on the button below</p>
-              <button class="button-7" role="button" onclick="location.href = 'complainRequest'; ">Submit a Complain</button>
+            <div class="card shadow-sm" style = "background-color: #b3cde0">
+                <div class="card-header bg-transparent border-0">
+                  <h3 class="mb-0"><i class="far fa-clone pr-1"></i><strong>Other Information</strong></h3>
+                </div>
+            <div class="card-body pt-0">
+            <p>To view Complains 'IN PROGRESS' OR 'NOT RESOLVED', click the button below</p>
+            <button style= 'margin-bottom:10px'class="button-7" role="button" onclick="changeStyle()">Complain 'IN PROGRESS' OR 'NOT RESOLVED'</button>
+            <p>To view Complains 'RESOLVED', click the button below</p>
+            <button class="button-7" role="button" onclick="changeStyle1()">Complain 'RESOLVED'</button>
 
           </div>
         </div>
@@ -533,8 +594,153 @@ h2 span {
     </div>
   </div>
 </div>
+<div class="container" style = "padding: 1rem;
+margin: 1rem;">
+<strong> 
+<h2 style = "
+text-align : center;
+font-weight : bold ;
+  margin-bottom : 20px;
+  font-size: 30px;
+  line-height: 40px;
+" id = "complainHeading"></h2></strong>
+<table id = "table"class="table-scroll small-first-col" style = " margin: auto;
+border-collapse: collapse;
+overflow-x: auto;
+display: block;
+width: fit-content;
+max-width: 100%;
+box-shadow: 0 0 1px 1px rgba(0, 0, 0, .1);">
+</table>
+</div>
     		</div>
 		</div>
     </div>  
+    <script>
+      function changeStyle(){
+        document.getElementById("complainHeading").textContent = "Complain 'IN PROGRESS' or 'NOT RESOLVED'";
+          var element =  document.getElementById("table");
+          element.innerHTML =  `<thead>
+              <tr>
+              <th style = "  border: solid rgb(200, 200, 200) 1px;
+              padding: .5rem;   text-align: left;
+              background-color: rgb(190, 220, 250);
+              text-transform: uppercase;
+              padding-top: 1rem;
+              padding-bottom: 1rem;
+              border-bottom: rgb(50, 50, 100) solid 2px;
+              border-top: none;">Complain ID</th>
+              <th style = "  border: solid rgb(200, 200, 200) 1px;
+              padding: .5rem;   text-align: left;
+              background-color: rgb(190, 220, 250);
+              text-transform: uppercase;
+              padding-top: 1rem;
+              padding-bottom: 1rem;
+              border-bottom: rgb(50, 50, 100) solid 2px;
+              border-top: none;">Date</th>
+              <th style = "  border: solid rgb(200, 200, 200) 1px;
+              padding: .5rem;   text-align: left;
+              background-color: rgb(190, 220, 250);
+              text-transform: uppercase;
+              padding-top: 1rem;
+              padding-bottom: 1rem;
+              border-bottom: rgb(50, 50, 100) solid 2px;
+              border-top: none;">Details</th>
+              <th style = "  border: solid rgb(200, 200, 200) 1px;
+              padding: .5rem;   text-align: left;
+              background-color: rgb(190, 220, 250);
+              text-transform: uppercase;
+              padding-top: 1rem;
+              padding-bottom: 1rem;
+              border-bottom: rgb(50, 50, 100) solid 2px;
+              border-top: none;">First Name</th>
+              <th style = "  border: solid rgb(200, 200, 200) 1px;
+              padding: .5rem;   text-align: left;
+              background-color: rgb(190, 220, 250);
+              text-transform: uppercase;
+              padding-top: 1rem;
+              padding-bottom: 1rem;
+              border-bottom: rgb(50, 50, 100) solid 2px;
+              border-top: none;">Last Name</th>
+              <th style = "  border: solid rgb(200, 200, 200) 1px;
+              padding: .5rem;   text-align: left;
+              background-color: rgb(190, 220, 250);
+              text-transform: uppercase;
+              padding-top: 1rem;
+              padding-bottom: 1rem;
+              border-bottom: rgb(50, 50, 100) solid 2px;
+              border-top: none;">Username</th>
+              </tr>
+            </thead>
+            <tbody class="body-half-screen">
+              {%for y in zs %}
+              <tr>
+                <td style = " border: solid rgb(200, 200, 200) 1px;
+                padding: .5rem; white-space: nowrap;
+                border-bottom: none;
+                color: rgb(20, 20, 20);">{{y.complainID}}</td>
+                <td style = " border: solid rgb(200, 200, 200) 1px;
+                padding: .5rem; white-space: nowrap;
+                border-bottom: none;
+                color: rgb(20, 20, 20);">{{y.date}}</td>
+                <td style = " border: solid rgb(200, 200, 200) 1px;
+                padding: .5rem; white-space: nowrap;
+                border-bottom: none;
+                color: rgb(20, 20, 20);">{{y.details}}</td>
+                <td style = " border: solid rgb(200, 200, 200) 1px;
+                padding: .5rem; white-space: nowrap;
+                border-bottom: none;
+                color: rgb(20, 20, 20);">{{y.first_name}}</td>
+                <td style = " border: solid rgb(200, 200, 200) 1px;
+                padding: .5rem; white-space: nowrap;
+                border-bottom: none;
+                color: rgb(20, 20, 20);">{{y.last_name}}</td>
+                <td style = " border: solid rgb(200, 200, 200) 1px;
+                padding: .5rem; white-space: nowrap;
+                border-bottom: none;
+                color: rgb(20, 20, 20);">{{y.student}}</td>
+              </tr>
+              {%endfor%}
+            </tbody>`;
+      }
+      function changeStyle1(){
+        document.getElementById("complainHeading").textContent = "Complain 'RESOLVED'";
+          var element =  document.getElementById("table");
+          element.innerHTML = `<thead>
+            <tr>
+            <th style = "  border: solid rgb(200, 200, 200) 1px;
+            padding: .5rem;">Complain ID</th>
+            <th style = "  border: solid rgb(200, 200, 200) 1px;
+            padding: .5rem;">Date</th>
+            <th style = "  border: solid rgb(200, 200, 200) 1px;
+            padding: .5rem;">Details</th>
+            <th style = "  border: solid rgb(200, 200, 200) 1px;
+            padding: .5rem;">First Name</th>
+            <th style = "  border: solid rgb(200, 200, 200) 1px;
+            padding: .5rem;">Last Name</th>
+            <th style = "  border: solid rgb(200, 200, 200) 1px;
+            padding: .5rem;">Username</th>
+            </tr>
+          </thead>
+          <tbody class="body-half-screen">
+            {%for y in ys %}
+            <tr>
+              <td style = " border: solid rgb(200, 200, 200) 1px;
+              padding: .5rem;">{{y.complainID}}</td>
+              <td style = " border: solid rgb(200, 200, 200) 1px;
+              padding: .5rem;">{{y.date}}</td>
+              <td style = " border: solid rgb(200, 200, 200) 1px;
+              padding: .5rem;">{{y.details}}</td>
+              <td style = " border: solid rgb(200, 200, 200) 1px;
+              padding: .5rem;">{{y.first_name}}</td>
+              <td style = " border: solid rgb(200, 200, 200) 1px;
+              padding: .5rem;">{{y.last_name}}</td>
+              <td style = " border: solid rgb(200, 200, 200) 1px;
+              padding: .5rem;">{{y.student}}</td>
+            </tr>
+            {%endfor%}
+          </tbody>`;
+      }
+  </script>
 
 </html>
