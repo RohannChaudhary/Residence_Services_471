@@ -5,7 +5,7 @@ from django.contrib.auth.models import User, auth
 from django.contrib import messages
 from . import models
 from . import serializer
-from .serializer import StudentSerializer,PersonSerializer, AdminSerializer, StaffSerializer, TechnicianSerializer, PaymentSerializer, ComplainSerializer
+from .serializer import StudentSerializer,PersonSerializer, AdminSerializer, StaffSerializer, TechnicianSerializer, PaymentSerializer, ComplainSerializer, MaintenanceSerializer, Fulfills_Maintenance
 from django.http import JsonResponse
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
@@ -17,6 +17,56 @@ def index(request):
 
 def register(request):
     return render(request,'register.html')
+
+def complainRequest(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        details = request.POST['details']
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
+        password = request.POST['password']
+ 
+    
+        person = models.Person.objects.all()
+        serializer = PersonSerializer(person,many=True)
+        content = JSONRenderer().render(serializer.data)
+        
+        xs = json.loads(content)
+        
+        array = []
+        for x in xs:
+            array.append(x['username'])
+            if x['username'] == username and x['password'] == password:
+                a = x
+                break
+            elif(x['username'] == username and x['password']!=password):
+                messages.info(request,'Incorrect Password')
+                return redirect('complainRequest')
+            
+        if not (username in array):
+            messages.info(request,"Invalid Username")
+            return redirect('complainRequest')
+        
+        student_list = list(models.Student.objects.all())
+        
+        student = models.Student()
+        for student1 in student_list:
+            if(str(student1.user) == username):
+                student = student1
+                break
+    
+
+        if(student is not None and admin is not None):
+            detailsAdd = username
+            m = models.Complain(first_name = first_name , last_name = last_name, student = student, date = date.today(), details = details + "\n" + detailsAdd, status = 'NOT RESOLVED')
+            m.save_base()
+            messages.info(request,'Complain Submitted')
+            return redirect('complainRequest')
+        else:
+            messages.info(request,'Invalid Username')
+            return redirect('complainRequest')
+    else:
+        return render(request,'complainRequest.html')
 
 def studentLogin(request):
     if request.method == 'POST':
@@ -30,14 +80,22 @@ def studentLogin(request):
 
         xs = json.loads(personContent)
         
+        array = []
         for x in xs:
+            array.append(x['username'])
             if x['username'] == username and x['password'] == passowrd:
                 a = x
                 break
+            elif(x['username'] == username and x['password']!=passowrd):
+                messages.info(request,'Incorrect Password')
+                return redirect('login')
             
-        
-                
-        
+        if not (username in array):
+            messages.info(request,"Invalid Username")
+            return redirect('login')
+            
+            
+               
         if(a['is_student']):
             
             student = models.Student.objects.all()
@@ -125,7 +183,7 @@ def studentLogin(request):
             staffContent = JSONRenderer().render(staffSerializer.data)
             
             technician = models.Technician.objects.all()
-            technicianSerializer = TechnicianSerializer(admin,many=True)
+            technicianSerializer = TechnicianSerializer(technician,many=True)
             technicianContent = JSONRenderer().render(technicianSerializer.data)
             
             xs = json.loads(staffContent)
@@ -136,28 +194,18 @@ def studentLogin(request):
                     b = y 
                     break 
                 
-            maintance = models.Maintenance.objects.all()
-            maintanceSerializer = MaintanceSerializer(maintance,many=True)
+            maintance = models.Fulfills_Maintenance.objects.all()
+            maintanceSerializer = Fulfills_Maintenance(maintance,many=True)
             maintanceContent = JSONRenderer().render(maintanceSerializer.data)
             
             zs = json.loads(maintanceContent) 
             
-            zs_dict = [z for z in zs if z['technician'] == username]
+            zs_dict = [z for z in zs if z['technicianID'] == username]
             
-            return render(request,'technicianDashboard.html',{'zs':zs_dict})
+            return render(request,'technicianDashboard.html',{'a':a, 'b': b ,'zs':zs_dict})
         else:
             messages.info(request,'Credentials Invalid')
-            return JsonResponse(serializer.data,safe=False)
             return redirect ('login')
-
-  
-
-        # if user is not None:
-        #     auth.login(request,user)
-        #     return redirect('/')
-        # else:
-        #     messages.info(request,'Credentials Invalid')
-        #     return redirect ('login')
     else:
        return render(request,'login.html') 
 
@@ -169,11 +217,32 @@ def maintenanceRequest(request):
         building = request.POST['building']
         first_name = request.POST['first_name']
         last_name = request.POST['last_name']
+        password = request.POST['password']
         
         # room1 = models.Room.objects.filter(roomNo = room , buildingID = building)
         # room = models.Room(room1)
         room_list = list(models.Room.objects.all())
         student_list = list(models.Student.objects.all())
+        
+        person = models.Person.objects.all()
+        serializer = PersonSerializer(person,many=True)
+        content = JSONRenderer().render(serializer.data)
+        
+        xs = json.loads(content)
+        
+        array = []
+        for x in xs:
+            array.append(x['username'])
+            if x['username'] == username and x['password'] == password:
+                a = x
+                break
+            elif(x['username'] == username and x['password']!=password):
+                messages.info(request,'Incorrect Password')
+                return redirect('maintenanceRequest')
+            
+        if not (username in array):
+            messages.info(request,"Invalid Username")
+            return redirect('maintenanceRequest')
         
         student = models.Student()
         room= models.Room()
@@ -199,39 +268,6 @@ def maintenanceRequest(request):
     else:
         return render(request,'maintenanceRequest.html')
 
-def complainRequest(request):
-    if request.method == 'POST':
-        username = request.POST['username']
-        admin = request.POST['admin']
-        details = request.POST['details']
-        building = request.POST['building']
-        
-        admin_list = list(models.Admin.objects.all())
-        student_list = list(models.Student.objects.all())
-        
-        student = models.Student()
-        admin = models.Admin()
-        for student1 in student_list:
-            if(student1.user == username):
-                student = student1
-                break
-
-        for admin1 in admin_list:
-            if admin1.position == admin:
-                admin  = admin1
-                break
-
-        if(student is not None and admin is not None):
-            detailsAdd = username
-            m = models.Complain(student = student, date = date.today(), admin = admin, details = details + "\n" + detailsAdd, status = 'NOT RESOLVED')
-            m.save_base()
-            messages.info(request,'Complain Submitted')
-            return redirect('complainRequest')
-        else:
-            messages.info(request,'Invalid Username')
-            return redirect('complainRequest')
-    else:
-        return render(request,'complainRequest.html')
     
 def admin(request,zs):
     return render(request,'adminDashboard.html',{'zs':zs})

@@ -138,6 +138,8 @@ class Complain(models.Model):
     admin = models.ForeignKey('Admin',on_delete=models.SET_NULL ,null=True)
     details = models.CharField(max_length=1000)
     status = models.CharField(max_length=20, choices=STATUS, default='NOT RESOLVED')
+    first_name = models.CharField(max_length=30,null=True)
+    last_name = models.CharField(max_length=30,null=True)
 
 class Fulfills_Maintenance(models.Model):
     maintenanceID = models.ForeignKey('Maintenance',on_delete=models.SET_NULL,null=True)

@@ -151,17 +151,18 @@
   font-style : italic ;
 }
 
+
 </style>
 <title>UofC Login Portal</title>
 <link href="{% static 'assets/img/UofCCoat.png' %}" rel="icon">
-{% for message in messages%}
-<h5>{{message}}</h5>
-{% endfor %}
 
 
 <div class="container">
   <div class="brand-logo"></div>
   <div class="brand-title">Residence Services</div>
+  {% for message in messages%}
+  <h5>{{message}}</h5>
+  {% endfor %}
   <form class="input" action = "login" method = "POST">
       {% csrf_token %}
      <p>Username: </p>  
