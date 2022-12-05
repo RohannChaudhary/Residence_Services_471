@@ -116,7 +116,7 @@ def studentLogin(request):
             zs_dict = [z for z in zs if z['admin'] == username and z['status'] != 'RESOLVED']
             ys_dict = [y for y in zs if y['admin'] == username and y['status'] == 'RESOLVED']               
             
-            return render(request,'adminDashboard.html',{'zs':zs_dict, 'ys':ys_dict})
+            return render(request,'adminDashboard.html',{'a':a, 'b':b,'zs':zs_dict, 'ys':ys_dict})
     
         elif(a['is_technician']):
             
