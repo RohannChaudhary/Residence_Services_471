@@ -15,6 +15,9 @@ from rest_framework.parsers import JSONParser
 def index(request):
     return render(request,'index.html')
 
+def register(request):
+    return render(request,'register.html')
+
 def studentLogin(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -232,3 +235,5 @@ def complainRequest(request):
     
 def admin(request,zs):
     return render(request,'adminDashboard.html',{'zs':zs})
+
+    
