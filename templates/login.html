@@ -1,4 +1,4 @@
-
+{% load static%}
 {% comment %} 
 
 <div class="container">
@@ -137,15 +137,23 @@
     left: 0;
   }
   input[type=submit] {
-    background-color : blue ;
-    padding:5px 15px; 
-    background:#ccc; 
-    border:0 none;
-    cursor:pointer;
-    -webkit-border-radius: 5px;
-    border-radius: 5px; 
+    background-color: #FFAE42;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
 }
+
+.mainLoginInput::-moz-placeholder {
+  font-family: 'myFont', Italic, Helvetica, sans-serif;
+  font-style : italic ;
+}
+
 </style>
+<title>UofC Login Portal</title>
+<link href="{% static 'assets/img/UofCCoat.png' %}" rel="icon">
 {% for message in messages%}
 <h5>{{message}}</h5>
 {% endfor %}
@@ -157,9 +165,9 @@
   <form class="input" action = "login" method = "POST">
       {% csrf_token %}
      <p>Username: </p>  
-     <input type = "text" name = "username"> 
+     <input class = "mainLoginInput" type = "text" name = "username"  placeholder="Enter Username"> 
      <p>Password: </p>
-     <input type = "password" name = "password"> </br>
+     <input class = "mainLoginInput" type = "password" name = "password" placeholder= "Enter Password"> </br>
      <input type="submit" value = "Login"/>
 
 
