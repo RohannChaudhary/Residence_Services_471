@@ -198,11 +198,23 @@ def studentLogin(request):
             maintanceSerializer = Fulfills_Maintenance(maintance,many=True)
             maintanceContent = JSONRenderer().render(maintanceSerializer.data)
             
+            maintenance1 = models.Maintenance.objects.all()
+            maintanceSerializer1 = MaintenanceSerializer(maintenance1,many=True)
+            maintanceContent1 = JSONRenderer().render(maintanceSerializer1.data)
+            
             zs = json.loads(maintanceContent) 
+            bs = json.loads(maintanceContent1)
             
             zs_dict = [z for z in zs if z['technicianID'] == username]
             
-            return render(request,'technicianDashboard.html',{'a':a, 'b': b ,'zs':zs_dict})
+           
+            for z in zs_dict :
+                array.append(z['maintenanceID'])
+                
+            ys = [z for z in bs if z['maintenanceID'] in array and z['status'] == 'RESOLVED']
+            zs = [z for z in bs if z['maintenanceID'] in array and z['status'] != 'RESOLVED']
+
+            return render(request,'technicianDashboard.html',{'a':a, 'b': b ,'zs':zs, 'ys':ys})
         else:
             messages.info(request,'Credentials Invalid')
             return redirect ('login')
@@ -257,7 +269,7 @@ def maintenanceRequest(request):
                 break
 
         if(student is not None and room is not None):
-            detailsAdd = username + " RoomNo: " + str(roomnumber) + "Building ID:" + building
+            detailsAdd = "   Username :" + username + " RoomNo : " + str(roomnumber) + " Building ID:" + building
             m = models.Maintenance(studentID = student, first_name = first_name, last_name = last_name, date = date.today(), room = room, details = details + "\n" + detailsAdd, status = 'NOT RESOLVED')
             m.save_base()
             messages.info(request,'Maintenance Request Submitted')
