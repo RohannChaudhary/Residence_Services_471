@@ -127,7 +127,7 @@
     <body class = "image-background" >
     <div class="form-style-10">
         <h1>Complain<span>Submit a complain!</span></h1>
-        <form action = "maintenanceRequest" method = "POST">
+        <form action = "complainRequest" method = "POST">
             {% csrf_token %}
             <div class="section"><span>1</span>Personal Information & Complain Detail</div>
             <div class="inner-wrap">
@@ -143,7 +143,7 @@
                 <p>Username: </p>
                 <input type = "text" name = "username">
                 <p>Password: </p>
-                <input type = "text" name = "password">
+                <input type = "password" name = "password">
             </div>
             
             <input type = "submit" > 

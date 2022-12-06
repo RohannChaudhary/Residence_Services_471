@@ -73,12 +73,16 @@ class Staff(models.Model):
 
 # Technician model
 class Technician(Staff):
+    technicianID = models.CharField(max_length=8)
+    gender = models.CharField(max_length=30, null=True)
     specialization = models.CharField(max_length=100, null=True)
     # def __str__(self):
     #     return str(str(self.user) + '(' + self.specialization + ')')  
 
 # Admin model
 class Admin(Staff):
+    adminID = models.CharField(max_length=8)
+    gender = models.CharField(max_length=30,null=True)
     position = models.CharField(max_length=100, null=True)
     # def __str__(self):
     #     # list_display = [field.name for field in Admin._meta.get_fields()]
@@ -134,6 +138,8 @@ class Complain(models.Model):
     admin = models.ForeignKey('Admin',on_delete=models.SET_NULL ,null=True)
     details = models.CharField(max_length=1000)
     status = models.CharField(max_length=20, choices=STATUS, default='NOT RESOLVED')
+    first_name = models.CharField(max_length=30,null=True)
+    last_name = models.CharField(max_length=30,null=True)
 
 class Fulfills_Maintenance(models.Model):
     maintenanceID = models.ForeignKey('Maintenance',on_delete=models.SET_NULL,null=True)
