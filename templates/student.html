@@ -420,6 +420,14 @@ h2 span {
               <button style= 'margin-bottom:10px'class="button-7" role="button" onclick="location.href = 'maintenanceRequest'; ">Submit Maintenance Request</button>
               <p>To file a complain, click on the button below</p>
               <button class="button-7" role="button" onclick="location.href = 'complainRequest'; ">Submit a Complain</button>
+              <p>To view your past complains, click on the button below</p>
+              <button class="button-7" role="button" onclick="changeStyle()">My Complain</button>
+              <p>To view your past maintenance, click on the button below</p>
+              <button class="button-7" role="button" onclick="changeStyle1()">My Maintenance Request</button>
+              <p>For Payment and Other information, Log in to your UCalgary Portal by click on the button below</p>
+              <button class="button-7" role="button" onclick="location.href = 'https://portal.my.ucalgary.ca'; ">Portal UCalgary</button>
+              <p>To Log Out</p>
+              <button class="button-7" role="button" onclick="location.href = 'index'; ">Log Out</button>
 
           </div>
         </div>
@@ -427,6 +435,202 @@ h2 span {
     </div>
   </div>
 </div>
+<div class="container" style = "padding: 1rem;
+margin: 1rem;">
+<strong> 
+<h2 style = "
+text-align : center;
+font-weight : bold ;
+  margin-bottom : 20px;
+  font-size: 30px;
+  line-height: 40px;
+" id = "complainHeading"></h2></strong>
+<table id = "table"class="table-scroll small-first-col" style = " margin: auto;
+border-collapse: collapse;
+overflow-x: auto;
+display: block;
+width: fit-content;
+max-width: 100%;
+box-shadow: 0 0 1px 1px rgba(0, 0, 0, .1);">
+</table>
+</div>
+    		</div>
+		</div>
+    </div>  
+    <script>
+      function changeStyle(){
+        document.getElementById("complainHeading").textContent = "My Complains";
+          var element =  document.getElementById("table");
+          element.innerHTML =  `<thead>
+            <tr>
+            <th style = "  border: solid rgb(200, 200, 200) 1px;
+            padding: .5rem;   text-align: left;
+            background-color: rgb(190, 220, 250);
+            text-transform: uppercase;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: rgb(50, 50, 100) solid 2px;
+            border-top: none;">Complain ID ID</th>
+            <th style = "  border: solid rgb(200, 200, 200) 1px;
+            padding: .5rem;   text-align: left;
+            background-color: rgb(190, 220, 250);
+            text-transform: uppercase;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: rgb(50, 50, 100) solid 2px;
+            border-top: none;">Date</th>
+            <th style = "  border: solid rgb(200, 200, 200) 1px;
+            padding: .5rem;   text-align: left;
+            background-color: rgb(190, 220, 250);
+            text-transform: uppercase;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: rgb(50, 50, 100) solid 2px;
+            border-top: none;">Details</th>
+            <th style = "  border: solid rgb(200, 200, 200) 1px;
+            padding: .5rem;   text-align: left;
+            background-color: rgb(190, 220, 250);
+            text-transform: uppercase;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: rgb(50, 50, 100) solid 2px;
+            border-top: none;">First Name</th>
+            <th style = "  border: solid rgb(200, 200, 200) 1px;
+            padding: .5rem;   text-align: left;
+            background-color: rgb(190, 220, 250);
+            text-transform: uppercase;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: rgb(50, 50, 100) solid 2px;
+            border-top: none;">Last Name</th>
+            <th style = "  border: solid rgb(200, 200, 200) 1px;
+            padding: .5rem;   text-align: left;
+            background-color: rgb(190, 220, 250);
+            text-transform: uppercase;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: rgb(50, 50, 100) solid 2px;
+            border-top: none;">Admin</th>
+            </tr>
+          </thead>
+            <tbody class="body-half-screen">
+              {%for y in zs %}
+              <tr>
+                <td style = " border: solid rgb(200, 200, 200) 1px;
+                padding: .5rem; white-space: nowrap;
+                border-bottom: none;
+                color: rgb(20, 20, 20);">{{y.complainID}}</td>
+                <td style = " border: solid rgb(200, 200, 200) 1px;
+                padding: .5rem; white-space: nowrap;
+                border-bottom: none;
+                color: rgb(20, 20, 20);">{{y.date}}</td>
+                <td style = " border: solid rgb(200, 200, 200) 1px;
+                padding: .5rem; white-space: nowrap;
+                border-bottom: none;
+                color: rgb(20, 20, 20);">{{y.details}}</td>
+                <td style = " border: solid rgb(200, 200, 200) 1px;
+                padding: .5rem; white-space: nowrap;
+                border-bottom: none;
+                color: rgb(20, 20, 20);">{{y.first_name}}</td>
+                <td style = " border: solid rgb(200, 200, 200) 1px;
+                padding: .5rem; white-space: nowrap;
+                border-bottom: none;
+                color: rgb(20, 20, 20);">{{y.last_name}}</td>
+                <td style = " border: solid rgb(200, 200, 200) 1px;
+                padding: .5rem; white-space: nowrap;
+                border-bottom: none;
+                color: rgb(20, 20, 20);">{{y.admin}}</td>
+              </tr>
+              {%endfor%}
+            </tbody>`;
+      }
+      function changeStyle1(){
+        document.getElementById("complainHeading").textContent = "My Maintenance Request";
+          var element =  document.getElementById("table");
+          element.innerHTML =  `<thead>
+            <tr>
+            <th style = "  border: solid rgb(200, 200, 200) 1px;
+            padding: .5rem;   text-align: left;
+            background-color: rgb(190, 220, 250);
+            text-transform: uppercase;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: rgb(50, 50, 100) solid 2px;
+            border-top: none;">Complain ID ID</th>
+            <th style = "  border: solid rgb(200, 200, 200) 1px;
+            padding: .5rem;   text-align: left;
+            background-color: rgb(190, 220, 250);
+            text-transform: uppercase;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: rgb(50, 50, 100) solid 2px;
+            border-top: none;">Date</th>
+            <th style = "  border: solid rgb(200, 200, 200) 1px;
+            padding: .5rem;   text-align: left;
+            background-color: rgb(190, 220, 250);
+            text-transform: uppercase;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: rgb(50, 50, 100) solid 2px;
+            border-top: none;">Details</th>
+            <th style = "  border: solid rgb(200, 200, 200) 1px;
+            padding: .5rem;   text-align: left;
+            background-color: rgb(190, 220, 250);
+            text-transform: uppercase;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: rgb(50, 50, 100) solid 2px;
+            border-top: none;">First Name</th>
+            <th style = "  border: solid rgb(200, 200, 200) 1px;
+            padding: .5rem;   text-align: left;
+            background-color: rgb(190, 220, 250);
+            text-transform: uppercase;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: rgb(50, 50, 100) solid 2px;
+            border-top: none;">Last Name</th>
+            <th style = "  border: solid rgb(200, 200, 200) 1px;
+            padding: .5rem;   text-align: left;
+            background-color: rgb(190, 220, 250);
+            text-transform: uppercase;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: rgb(50, 50, 100) solid 2px;
+            border-top: none;">Status</th>
+            </tr>
+          </thead>
+            <tbody class="body-half-screen">
+              {%for y in ys %}
+              <tr>
+                <td style = " border: solid rgb(200, 200, 200) 1px;
+                padding: .5rem; white-space: nowrap;
+                border-bottom: none;
+                color: rgb(20, 20, 20);">{{y.maintenanceID}}</td>
+                <td style = " border: solid rgb(200, 200, 200) 1px;
+                padding: .5rem; white-space: nowrap;
+                border-bottom: none;
+                color: rgb(20, 20, 20);">{{y.date}}</td>
+                <td style = " border: solid rgb(200, 200, 200) 1px;
+                padding: .5rem; white-space: nowrap;
+                border-bottom: none;
+                color: rgb(20, 20, 20);">{{y.details}}</td>
+                <td style = " border: solid rgb(200, 200, 200) 1px;
+                padding: .5rem; white-space: nowrap;
+                border-bottom: none;
+                color: rgb(20, 20, 20);">{{y.first_name}}</td>
+                <td style = " border: solid rgb(200, 200, 200) 1px;
+                padding: .5rem; white-space: nowrap;
+                border-bottom: none;
+                color: rgb(20, 20, 20);">{{y.last_name}}</td>
+                <td style = " border: solid rgb(200, 200, 200) 1px;
+                padding: .5rem; white-space: nowrap;
+                border-bottom: none;
+                color: rgb(20, 20, 20);">{{y.status}}</td>
+              </tr>
+              {%endfor%}
+            </tbody>`;
+      }
+  </script>
     		</div>
 		</div>
     </div>  

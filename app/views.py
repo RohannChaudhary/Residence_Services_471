@@ -120,15 +120,23 @@ def studentLogin(request):
                     c = z
                     break   
                 
-               
             complain = models.Complain.objects.all()
             complainSerializer = ComplainSerializer(complain,many=True)
             complainContent = JSONRenderer().render(complainSerializer.data)
             
-            complains = json.loads(complainContent)
+            zs = json.loads(complainContent)
             
-            studentComplains = [z for z in complains if z['student'] == username]
+            zs_dict = [z for z in zs if z['student'] == username]
             
+            
+            maintenance1 = models.Maintenance.objects.all()
+            maintanceSerializer1 = MaintenanceSerializer(maintenance1,many=True)
+            maintanceContent1 = JSONRenderer().render(maintanceSerializer1.data)
+            
+            
+            bs = json.loads(maintanceContent1)
+            
+            ys_dict = [z for z in bs if z['studentID']==username]
                 
         
             a = dict(a)
@@ -143,7 +151,7 @@ def studentLogin(request):
             #     amountDue = 10000
 
 
-            return render(request,'student.html',{'a':a, 'b':b})              
+            return render(request,'student.html',{'a':a, 'b':b, 'zs':zs_dict, 'ys':ys_dict})              
         
         elif(a['is_admin']):
             
