@@ -102,7 +102,7 @@ class Room(models.Model):
 
     class Constraint:
         constraints = [models.UniqueConstraint(fields=['roomNo','buildingID'], name = 'roomID')]
-
+        
 class Room_Booking(models.Model):
     roomNo = models.ForeignKey('Room',on_delete=models.CASCADE)
     studentID = models.OneToOneField('Student', on_delete=models.SET_NULL,null=True)
