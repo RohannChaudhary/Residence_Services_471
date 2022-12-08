@@ -150,3 +150,9 @@ class Payment(models.Model):
     date = models.DateField()
     studentID = models.OneToOneField('Student',on_delete=models.SET_NULL,null=True)
     amount = models.IntegerField()
+    
+    
+class Mail(models.Model):
+    mailID = models.AutoField(primary_key=True)
+    date = models.DateField()
+    studentID = models.ForeignKey(Student,on_delete=models.CASCADE)

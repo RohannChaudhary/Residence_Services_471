@@ -5,7 +5,7 @@ from django.contrib.auth.models import User, auth
 from django.contrib import messages
 from . import models
 from . import serializer
-from .serializer import StudentSerializer,PersonSerializer, AdminSerializer, StaffSerializer, TechnicianSerializer, PaymentSerializer, ComplainSerializer, MaintenanceSerializer, Fulfills_Maintenance, RoomBookingSerializer
+from .serializer import StudentSerializer,PersonSerializer, AdminSerializer, StaffSerializer, TechnicianSerializer, PaymentSerializer, ComplainSerializer,MailSerializer, MaintenanceSerializer, Fulfills_Maintenance, RoomBookingSerializer
 from django.http import JsonResponse
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
@@ -137,12 +137,18 @@ def studentLogin(request):
             roomBookingSerializer = RoomBookingSerializer(roomBooking,many=True)
             roomBookingContent = JSONRenderer().render(roomBookingSerializer.data)
             
+            mail = models.Mail.objects.all()
+            mailSerializer = MailSerializer(mail,many=True)
+            mailSerializerContent = JSONRenderer().render(mailSerializer.data)
+            
             
             bs = json.loads(maintanceContent1)
             cs = json.loads(roomBookingContent)
+            ds = json.loads(mailSerializerContent)
             
 
             ys_dict = [z for z in bs if z['studentID']==username]
+            ms_dict = [z for z in ds if z['studentID'] == username]
             
             
             for z in cs:
@@ -162,7 +168,7 @@ def studentLogin(request):
             #     amountDue = 10000
 
 
-            return render(request,'student.html',{'a':a, 'b':b, 'c':c,'zs':zs_dict, 'ys':ys_dict})              
+            return render(request,'student.html',{'a':a, 'b':b, 'c':c,'zs':zs_dict, 'ys':ys_dict, 'ms':ms_dict})              
         
         elif(a['is_admin']):
             

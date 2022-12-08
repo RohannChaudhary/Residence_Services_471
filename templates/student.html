@@ -429,6 +429,8 @@ h2 span {
               <button class="button-7" role="button" onclick="changeStyle()">My Complain</button>
               <p>To view your past maintenance, click on the button below</p>
               <button class="button-7" role="button" onclick="changeStyle1()">My Maintenance Request</button>
+              <p>To view your mails, click on the button below</p>
+              <button class="button-7" role="button" onclick="changeStyle2()">My Mail</button>
               <p>For Payment and Other information, Log in to your UCalgary Portal by click on the button below</p>
               <button class="button-7" role="button" onclick="location.href = 'https://portal.my.ucalgary.ca'; ">Portal UCalgary</button>
               <p>To Log Out</p>
@@ -632,6 +634,55 @@ box-shadow: 0 0 1px 1px rgba(0, 0, 0, .1);">
                 border-bottom: none;
                 color: rgb(20, 20, 20);">{{y.status}}</td>
               </tr>
+              {%endfor%}
+            </tbody>`;
+      }
+      function changeStyle2(){
+        document.getElementById("complainHeading").textContent = "My Mail ";
+          var element =  document.getElementById("table");
+          element.innerHTML =  `<thead>
+            <tr>
+            <th style = "  border: solid rgb(200, 200, 200) 1px;
+            padding: .5rem;   text-align: left;
+            background-color: rgb(190, 220, 250);
+            text-transform: uppercase;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: rgb(50, 50, 100) solid 2px;
+            border-top: none;">Mail ID ID</th>
+            <th style = "  border: solid rgb(200, 200, 200) 1px;
+            padding: .5rem;   text-align: left;
+            background-color: rgb(190, 220, 250);
+            text-transform: uppercase;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: rgb(50, 50, 100) solid 2px;
+            border-top: none;">Date</th>
+            <th style = "  border: solid rgb(200, 200, 200) 1px;
+            padding: .5rem;   text-align: left;
+            background-color: rgb(190, 220, 250);
+            text-transform: uppercase;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: rgb(50, 50, 100) solid 2px;
+            border-top: none;">Student</th>
+            </tr>
+          </thead>
+            <tbody class="body-half-screen">
+              {%for y in ms %}
+              <tr>
+                <td style = " border: solid rgb(200, 200, 200) 1px;
+                padding: .5rem; white-space: nowrap;
+                border-bottom: none;
+                color: rgb(20, 20, 20);">{{y.mailID}}</td>
+                <td style = " border: solid rgb(200, 200, 200) 1px;
+                padding: .5rem; white-space: nowrap;
+                border-bottom: none;
+                color: rgb(20, 20, 20);">{{y.date}}</td>
+                <td style = " border: solid rgb(200, 200, 200) 1px;
+                padding: .5rem; white-space: nowrap;
+                border-bottom: none;
+                color: rgb(20, 20, 20);">{{y.studentID}}</td>
               {%endfor%}
             </tbody>`;
       }
