@@ -649,7 +649,7 @@ box-shadow: 0 0 1px 1px rgba(0, 0, 0, .1);">
             padding-top: 1rem;
             padding-bottom: 1rem;
             border-bottom: rgb(50, 50, 100) solid 2px;
-            border-top: none;">Mail ID ID</th>
+            border-top: none;">Mail ID</th>
             <th style = "  border: solid rgb(200, 200, 200) 1px;
             padding: .5rem;   text-align: left;
             background-color: rgb(190, 220, 250);
@@ -676,8 +676,33 @@ box-shadow: 0 0 1px 1px rgba(0, 0, 0, .1);">
             border-top: none;">Picked Up</th>
             </tr>
           </thead>
+          <tbody class="body-half-screen">
+            {%for y in ms %}
+            {%if y.pickedUp%}
+            {% else %}
+            <tr>
+              <td style = " border: solid rgb(200, 200, 200) 1px;
+              padding: .5rem; white-space: nowrap;
+              border-bottom: none;
+              color: rgb(20, 20, 20);">{{y.mailID}}</td>
+              <td style = " border: solid rgb(200, 200, 200) 1px;
+              padding: .5rem; white-space: nowrap;
+              border-bottom: none;
+              color: rgb(20, 20, 20);">{{y.date}}</td>
+              <td style = " border: solid rgb(200, 200, 200) 1px;
+              padding: .5rem; white-space: nowrap;
+              border-bottom: none;
+              color: rgb(20, 20, 20);">{{y.studentID}}</td>
+              <td style = " border: solid rgb(200, 200, 200) 1px;
+              padding: .5rem; white-space: nowrap;
+              border-bottom: none;
+              color: rgb(20, 20, 20);">{{y.pickedUp}}</td>
+            {% endif %}
+            {%endfor%}
+          </tbody>
             <tbody class="body-half-screen">
               {%for y in ms %}
+              {%if y.pickedUp%}
               <tr>
                 <td style = " border: solid rgb(200, 200, 200) 1px;
                 padding: .5rem; white-space: nowrap;
@@ -695,6 +720,7 @@ box-shadow: 0 0 1px 1px rgba(0, 0, 0, .1);">
                 padding: .5rem; white-space: nowrap;
                 border-bottom: none;
                 color: rgb(20, 20, 20);">{{y.pickedUp}}</td>
+              {% endif %}
               {%endfor%}
             </tbody>`;
       }
