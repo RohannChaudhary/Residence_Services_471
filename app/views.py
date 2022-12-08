@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, datetime
 import json
 from django.shortcuts import render,redirect
 from django.contrib.auth.models import User, auth
@@ -150,6 +150,8 @@ def studentLogin(request):
             ys_dict = [z for z in bs if z['studentID']==username]
             ms_dict = [z for z in ds if z['studentID'] == username]
             
+            ms_dict.sort(key = lambda x: datetime.strptime(x['date'],'%Y-%m-%d'), reverse=True)
+            
             
             for z in cs:
                 if z['studentID'] == username:
@@ -160,12 +162,6 @@ def studentLogin(request):
             b = dict(b)
             c = dict(c)
 
-
-            # #Payment Due
-            # if c['date'][0:4:1] == str(date.today().year):
-            #     amountDue = 10000 - c['amount']
-            # else :
-            #     amountDue = 10000
 
 
             return render(request,'student.html',{'a':a, 'b':b, 'c':c,'zs':zs_dict, 'ys':ys_dict, 'ms':ms_dict})              
