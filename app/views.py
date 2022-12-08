@@ -5,7 +5,7 @@ from django.contrib.auth.models import User, auth
 from django.contrib import messages
 from . import models
 from . import serializer
-from .serializer import StudentSerializer,PersonSerializer, AdminSerializer, StaffSerializer, TechnicianSerializer, PaymentSerializer, ComplainSerializer, MaintenanceSerializer, Fulfills_Maintenance
+from .serializer import StudentSerializer,PersonSerializer, AdminSerializer, StaffSerializer, TechnicianSerializer, PaymentSerializer, ComplainSerializer, MaintenanceSerializer, Fulfills_Maintenance, RoomBookingSerializer
 from django.http import JsonResponse
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
@@ -133,15 +133,26 @@ def studentLogin(request):
             maintanceSerializer1 = MaintenanceSerializer(maintenance1,many=True)
             maintanceContent1 = JSONRenderer().render(maintanceSerializer1.data)
             
+            roomBooking = models.Room_Booking.objects.all()
+            roomBookingSerializer = RoomBookingSerializer(roomBooking,many=True)
+            roomBookingContent = JSONRenderer().render(roomBookingSerializer.data)
+            
             
             bs = json.loads(maintanceContent1)
+            cs = json.loads(roomBookingContent)
             
+
             ys_dict = [z for z in bs if z['studentID']==username]
-                
+            
+            
+            for z in cs:
+                if z['studentID'] == username:
+                    c = z
+                    break 
         
             a = dict(a)
             b = dict(b)
-            # c = dict(c)
+            c = dict(c)
 
 
             # #Payment Due
@@ -151,7 +162,7 @@ def studentLogin(request):
             #     amountDue = 10000
 
 
-            return render(request,'student.html',{'a':a, 'b':b, 'zs':zs_dict, 'ys':ys_dict})              
+            return render(request,'student.html',{'a':a, 'b':b, 'c':c,'zs':zs_dict, 'ys':ys_dict})              
         
         elif(a['is_admin']):
             

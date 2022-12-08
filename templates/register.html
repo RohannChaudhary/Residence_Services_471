@@ -45,7 +45,7 @@
           <div class="w-full flex-1 mt-8">
             
 
-            <div class="mx-auto max-w-xs">
+            <div class="mx-auto max-w-xs" id="replacingClass">
               <input
                 class="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                 id = "emailInformation"
@@ -66,7 +66,7 @@
               />
               <button
                 class="mt-5 tracking-wide font-semibold bg-indigo-500 text-gray-100 w-full py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
-               id = "registrationButton" onclick = myfunction()>
+               id = "registrationButton" onclick = "myfunction()">
                 <svg
                   class="w-6 h-6 -ml-2"
                   fill="none"
@@ -123,7 +123,6 @@
       </div>
   </body>
   <script>
-    var element = document.getElementById('registrationButton')
     element.onclick = function() {myfunction()}
     function closeTreactPopup(){ 
         document.querySelector(".treact-popup").classList.add("hidden");
@@ -132,7 +131,8 @@
         document.querySelector(".treact-popup").classList.remove("hidden");
     }
     funtion myfunction(){
-      document.getElementById("phonenum").value = "";
+      var element = document.getElementById('replacingClass');
+      
     }
     document.querySelector(".close-treact-popup").addEventListener("click", closeTreactPopup);
     setTimeout(openTreactPopup, 3000)
