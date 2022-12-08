@@ -62,3 +62,8 @@ class Fulfills_Maintenance(serializers.ModelSerializer):
     class Meta:
         model = models.Fulfills_Maintenance
         fields = '__all__'
+        
+class MailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Mail
+        fields = '__all__'
